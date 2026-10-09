@@ -1,0 +1,12 @@
+(function(root){'use strict';
+const letters=['A','B','C','D','E'];
+const grade=(q,picks)=>{const correct=letters.filter(l=>!!picks[l]===q.key[l].selected).length;return {correct,exact:correct===5};};
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const compound=rs=>({factor:rs.reduce((v,r)=>v*(1+r),1),arithmetic:rs.reduce((a,b)=>a+b,0)/rs.length,geometric:Math.pow(rs.reduce((v,r)=>v*(1+r),1),1/rs.length)-1});
+const portfolio=(w,a,b,rho)=>Math.sqrt(Math.max(0,w*w*a*a+(1-w)*(1-w)*b*b+2*w*(1-w)*a*b*rho));
+const sharpe=(mean,rf,vol,m)=>vol>0?(mean-rf)/vol*Math.sqrt(m):null;
+const capm=(rf,beta,market,actual,value)=>({expected:rf+beta*(market-rf),alpha:actual-(rf+beta*(market-rf)),hedge:-beta*value});
+const presentValue=(cf,r,t)=>cf/Math.pow(1+r,t);
+const errors=(actual,pred)=>{const e=actual.map((v,i)=>v-pred[i]);const mse=e.reduce((s,v)=>s+v*v,0)/e.length;return {mse,rmse:Math.sqrt(mse),mae:e.reduce((s,v)=>s+Math.abs(v),0)/e.length};};
+root.ExamLogic={letters,grade,shuffle,compound,portfolio,sharpe,capm,presentValue,errors};
+})(typeof window!=='undefined'?window:globalThis);
