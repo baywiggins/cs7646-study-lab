@@ -1,0 +1,127 @@
+{
+  "pdf": "docs/assets/CS7646_Exam2_Study_Guide.pdf",
+  "page_count": 50,
+  "domains": {
+    "ML2-D1": {
+      "page": 5,
+      "title": "Reinforcement Learning Problem Framing"
+    },
+    "ML2-D2": {
+      "page": 7,
+      "title": "Markov Decision Processes, Policies, and Values"
+    },
+    "ML2-D3": {
+      "page": 9,
+      "title": "Q-Learning Mechanics"
+    },
+    "ML2-D4": {
+      "page": 11,
+      "title": "Exploration, Exploitation, and Learning Dynamics"
+    },
+    "ML2-D5": {
+      "page": 13,
+      "title": "Dyna and Model-Based Reinforcement Learning"
+    },
+    "ML2-D6": {
+      "page": 15,
+      "title": "State Representation, Discretization, and Reward Design"
+    },
+    "ML2-D7": {
+      "page": 17,
+      "title": "Reinforcement Learning for Trading"
+    },
+    "ML2-D8": {
+      "page": 19,
+      "title": "Comparative Strategy Learning and Evaluation"
+    },
+    "ML2-D9": {
+      "page": 21,
+      "title": "Deep Learning and Neural-Network Foundations"
+    },
+    "ML2-D10": {
+      "page": 23,
+      "title": "Sequential, Generative, and Responsible AI"
+    },
+    "QF2-D1": {
+      "page": 25,
+      "title": "Financial Time Series and Market Data Behavior"
+    },
+    "QF2-D2": {
+      "page": 27,
+      "title": "Technical Indicators and Signal Construction"
+    },
+    "QF2-D3": {
+      "page": 29,
+      "title": "Alpha Research and Formulaic Signals"
+    },
+    "QF2-D4": {
+      "page": 31,
+      "title": "Fundamental Law of Active Portfolio Management"
+    },
+    "QF2-D5": {
+      "page": 33,
+      "title": "Advanced Portfolio Construction"
+    },
+    "QF2-D6": {
+      "page": 35,
+      "title": "Strategy Evaluation and Performance Attribution"
+    },
+    "QF2-D7": {
+      "page": 37,
+      "title": "Trading Frictions, Capacity, and Implementability"
+    },
+    "QF2-D8": {
+      "page": 39,
+      "title": "Execution Algorithms and Order Book Analytics"
+    },
+    "QF2-D9": {
+      "page": 41,
+      "title": "Options and Derivative Payoffs"
+    },
+    "QF2-D10": {
+      "page": 43,
+      "title": "AI-Enabled Investment Processes and Decision Support"
+    }
+  },
+  "selfTestPage": 45,
+  "answerPage": 47,
+  "formulaPage": 3,
+  "sections": {
+    "navigation": 2,
+    "formulas-ml": 3,
+    "formulas-qf": 4,
+    "ML2-D1": 5,
+    "ML2-D2": 7,
+    "ML2-D3": 9,
+    "ML2-D4": 11,
+    "ML2-D5": 13,
+    "ML2-D6": 15,
+    "ML2-D7": 17,
+    "ML2-D8": 19,
+    "ML2-D9": 21,
+    "ML2-D10": 23,
+    "QF2-D1": 25,
+    "QF2-D2": 27,
+    "QF2-D3": 29,
+    "QF2-D4": 31,
+    "QF2-D5": 33,
+    "QF2-D6": 35,
+    "QF2-D7": 37,
+    "QF2-D8": 39,
+    "QF2-D9": 41,
+    "QF2-D10": 43,
+    "self-test": 45,
+    "self-test-2": 46,
+    "answers": 47,
+    "answers-2": 48,
+    "cautions": 49,
+    "sources": 50
+  },
+  "scope": {
+    "questions": 420,
+    "groups": 140,
+    "domains": 20,
+    "workedExamples": 61,
+    "selfTests": 20
+  }
+}

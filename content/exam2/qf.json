@@ -1,0 +1,2243 @@
+{
+  "domains": [
+    {
+      "id": "QF2-D1",
+      "subject": "QF",
+      "number": 1,
+      "title": "Financial Time Series and Market Data Behavior",
+      "count": 21,
+      "page": 588,
+      "core": [
+        {
+          "title": "Use the right return representation",
+          "text": "A price is a dollar level; a return measures change relative to invested capital. Equal dollar price changes can imply very different percentage gains. Simple returns compound by multiplying growth factors; log returns add across time. Normalizing prices to a common starting value makes cumulative price growth comparable but does not equalize risk, remove regime changes, or include omitted dividends."
+        },
+        {
+          "title": "Respect the information clock",
+          "text": "A usable forecast must be computed from information available before the intended trade. Market closing times, publication times, lag direction, and the return measurement interval all matter. Trailing windows can respect this order; centered windows containing future observations cannot. Chronological or walk-forward evaluation more closely reproduces deployment than randomly mixing past and future observations."
+        },
+        {
+          "title": "Historical statistics can change",
+          "text": "Short rolling windows react faster but are noisier; long windows are smoother but retain obsolete observations. Trends, structural breaks, changing competition, and shifting correlations can make old estimates unreliable. Returns may be more stable than price levels without being stationary. A precise estimate from a large old sample can still describe the wrong current regime."
+        },
+        {
+          "title": "Separate direction, magnitude, and realizability",
+          "text": "Momentum is continuation; mean reversion is reversal toward a reference relationship. Both can occur at different horizons. Volatility clustering means large absolute returns cluster, even when return signs are hard to predict. Any signal must survive uncertainty, selection bias, its own decay, and implementation costs before it becomes an economically useful strategy."
+        }
+      ],
+      "groups": [
+        {
+          "number": 1,
+          "title": "Prices, Returns, and Transformations",
+          "ids": [
+            "QF2-D1G1Q1",
+            "QF2-D1G1Q2",
+            "QF2-D1G1Q3"
+          ],
+          "page": 588,
+          "rules": [
+            "Compare securities using percentage or total returns rather than dollar price changes when initial prices differ.",
+            "Compound simple returns multiplicatively; add adjacent log returns only for positive prices.",
+            "Normalized price P_t/P_0 measures relative price growth; use consistent dates and distribution adjustments."
+          ],
+          "traps": [
+            "A high quoted share price does not establish high risk.",
+            "Normalization changes scale, not future returns or stationarity."
+          ]
+        },
+        {
+          "number": 2,
+          "title": "Temporal Dependence and Lagged Relationships",
+          "ids": [
+            "QF2-D1G2Q1",
+            "QF2-D1G2Q2",
+            "QF2-D1G2Q3"
+          ],
+          "page": 590,
+          "rules": [
+            "Autocorrelation measures association between a series and its lag; a negative lag-one estimate is consistent with average short-horizon reversal.",
+            "Align actual information and trading times before interpreting a lead-lag relationship across markets.",
+            "Use time-aware validation and investigate sampling uncertainty, bid-ask effects, and net trading costs."
+          ],
+          "traps": [
+            "Correlation neither proves causation nor guarantees tomorrow’s sign.",
+            "More high-frequency rows or shuffled observations do not create independent evidence."
+          ]
+        },
+        {
+          "number": 3,
+          "title": "Rolling Windows and Time-Varying Statistics",
+          "ids": [
+            "QF2-D1G3Q1",
+            "QF2-D1G3Q2",
+            "QF2-D1G3Q3"
+          ],
+          "page": 592,
+          "rules": [
+            "Short lookbacks favor responsiveness; long lookbacks favor smoothing and estimation stability.",
+            "Rolling correlation changes the estimated diversification benefit and is not a permanent asset property.",
+            "Use trailing data, a defined warm-up policy, and any signal lag needed to precede the traded return."
+          ],
+          "traps": [
+            "Centered windows leak future information.",
+            "Choosing the historically best window on the evaluation sample adds selection bias."
+          ]
+        },
+        {
+          "number": 4,
+          "title": "Trend, Momentum, and Mean Reversion",
+          "ids": [
+            "QF2-D1G4Q1",
+            "QF2-D1G4Q2",
+            "QF2-D1G4Q3"
+          ],
+          "page": 594,
+          "rules": [
+            "Momentum and mean reversion are conditional hypotheses about a specified horizon, not universal laws.",
+            "A pair trade may rely on mean reversion of a spread even when neither stock price is mean reverting.",
+            "Check economic relationships, events, liquidity, and regime changes before treating an extreme move as continuation or reversal."
+          ],
+          "traps": [
+            "A wide spread does not guarantee convergence after a structural break.",
+            "A large price jump alone does not identify its economic mechanism."
+          ]
+        },
+        {
+          "number": 5,
+          "title": "Stationarity and Nonstationarity",
+          "ids": [
+            "QF2-D1G5Q1",
+            "QF2-D1G5Q2",
+            "QF2-D1G5Q3"
+          ],
+          "page": 596,
+          "rules": [
+            "A changing mean, variance, or dependence structure can invalidate stationary historical estimates.",
+            "Trending series can produce impressive in-sample relationships without useful predictive content.",
+            "Compare rolling, subperiod, and forward results; adapting more quickly also increases estimation noise."
+          ],
+          "traps": [
+            "More obsolete observations do not repair a structural break.",
+            "Positive full-sample return does not imply positive current expected return."
+          ]
+        },
+        {
+          "number": 6,
+          "title": "Volatility Clustering and Regime Behavior",
+          "ids": [
+            "QF2-D1G6Q1",
+            "QF2-D1G6Q2",
+            "QF2-D1G6Q3"
+          ],
+          "page": 598,
+          "rules": [
+            "Persistence in absolute or squared returns can coexist with little autocorrelation in signed returns.",
+            "Volatility targeting can increase exposure in calm markets and leave the portfolio overexposed when volatility jumps.",
+            "Examine stressed and reversing regimes because correlation and volatility can rise together."
+          ],
+          "traps": [
+            "Predictable volatility does not imply predictable return direction.",
+            "Regimes defined after seeing losses can introduce selection bias."
+          ]
+        },
+        {
+          "number": 7,
+          "title": "Information Decay and Signal-to-Noise",
+          "ids": [
+            "QF2-D1G7Q1",
+            "QF2-D1G7Q2",
+            "QF2-D1G7Q3"
+          ],
+          "page": 600,
+          "rules": [
+            "Match the forecast target, holding period, and actual execution time to the signal’s decay horizon.",
+            "Compare realizable net value, including latency and turnover, rather than only gross forecast magnitude.",
+            "Testing many candidate indicators increases false discovery risk; repeated test-set tuning consumes the holdout."
+          ],
+          "traps": [
+            "A significant 20-minute effect does not establish next-day profitability.",
+            "No economic rationale raises scrutiny but does not mathematically prove zero predictive value."
+          ]
+        }
+      ],
+      "formulas": [
+        {
+          "name": "Simple and compounded returns",
+          "formula": "r_t = P_t / P_(t−1) − 1; R_0:T = ∏(1 + r_t) − 1",
+          "conditions": "Prices must be consistently adjusted; price return omits distributions unless incorporated."
+        },
+        {
+          "name": "Log return",
+          "formula": "ℓ_t = ln(P_t / P_(t−1)); Σℓ_t = ln(P_T / P_0); R = exp(Σℓ_t) − 1",
+          "conditions": "Positive prices; logs are additive across adjacent time periods, not a change in economic wealth."
+        },
+        {
+          "name": "Normalized price",
+          "formula": "N_t = P_t / P_0; cumulative price return = N_t − 1",
+          "conditions": "Common start date and consistent treatment of dividends, splits, and other adjustments."
+        },
+        {
+          "name": "Lag-k autocorrelation",
+          "formula": "ρ_k = Corr(r_t, r_(t−k))",
+          "conditions": "An estimated average relationship; sampling uncertainty and microstructure can matter."
+        },
+        {
+          "name": "Trailing sample statistics",
+          "formula": "μ_t = (1/n) Σ r_(t−j); s_t² = [Σ(r_(t−j) − μ_t)²] / (n−1), j = 0,…,n−1",
+          "conditions": "A full trailing sample with n > 1; information through t must be available before the trade."
+        }
+      ],
+      "examples": [
+        {
+          "title": "Equal dollar moves, unequal returns",
+          "prompt": "A $25 stock and a $500 stock each rise $5. Which performs better for equal-dollar positions?",
+          "work": "The returns are 5/25 = 20% and 5/500 = 1%. An equal $1,000 investment earns $200 versus $10 before costs.",
+          "result": "The lower-priced stock earns the higher percentage return; share price itself does not measure risk.",
+          "id": "QF2-D1G1Q1",
+          "page": 588
+        },
+        {
+          "title": "Compounding does not cancel",
+          "prompt": "A $100 investment earns +10% and then −10%.",
+          "work": "Ending wealth = 100 × 1.10 × 0.90 = $99. Simple-return sum = 0%; cumulative return = −1%. Log-return sum = ln(0.99) ≈ −0.01005.",
+          "result": "The actual loss is $1 regardless of return representation.",
+          "id": "QF2-D1G1Q2",
+          "page": 588
+        },
+        {
+          "title": "A valid statistic at an unusable time",
+          "prompt": "A news effect is strongest within 20 minutes, but execution occurs at the next day’s close.",
+          "work": "The relevant question is how much predictive return remains after the execution time. The original 20-minute event study does not measure that remaining return; test the tradable horizon with costs.",
+          "result": "Statistical evidence at the original horizon is insufficient for this implementation.",
+          "id": "QF2-D1G7Q1",
+          "page": 600
+        }
+      ]
+    },
+    {
+      "id": "QF2-D2",
+      "subject": "QF",
+      "number": 2,
+      "title": "Technical Indicators and Signal Construction",
+      "count": 21,
+      "page": 605,
+      "core": [
+        {
+          "title": "An indicator summarizes the past",
+          "text": "Moving averages smooth price history; momentum compares endpoints; bands locate price relative to a rolling center and dispersion; oscillators summarize recent strength on a bounded scale. Each construction describes observations. A complete strategy additionally needs a hypothesis, entry and exit rules, position sizes, risk limits, and feasible execution."
+        },
+        {
+          "title": "Responsiveness always has a cost",
+          "text": "Short windows react earlier but respond more strongly to noise and can cause whipsaws. Long windows smooth more but can remain anchored to a regime that has already ended. Exponential weighting emphasizes recent observations without predicting a move before it occurs. Window selection should be tested for stability rather than justified by one sharp in-sample optimum."
+        },
+        {
+          "title": "Thresholds are choices, not guarantees",
+          "text": "A price above an upper Bollinger Band may support a breakout hypothesis or a mean-reversion hypothesis. An overbought oscillator can stay overbought throughout an uptrend. Requiring confirmation may reduce some premature entries but delays action and does not eliminate false signals. Interpret thresholds in the asset, horizon, and regime where they will be used."
+        },
+        {
+          "title": "Combine information deliberately",
+          "text": "Percentage returns and z-scores help compare different scales; ranks retain order while discarding magnitude differences. None of these transformations creates predictive information or stationarity. Multiple price-trend indicators may largely repeat the same information. Conflicting signals require a predefined combination or regime rule whose net performance is evaluated out of sample."
+        }
+      ],
+      "groups": [
+        {
+          "number": 1,
+          "title": "Moving Averages and Trend Measures",
+          "ids": [
+            "QF2-D2G1Q1",
+            "QF2-D2G1Q2",
+            "QF2-D2G1Q3"
+          ],
+          "page": 605,
+          "rules": [
+            "An n-period SMA gives equal weight to observations inside its current window; an EMA conventionally gives more weight to recent observations.",
+            "A short average typically reacts faster and whipsaws more; a long average typically smooths more and lags more.",
+            "A crossover compares fast and slow averages and still requires explicit sizing, exits, costs, and execution rules."
+          ],
+          "traps": [
+            "EMA does not guarantee advance knowledge or greater profitability.",
+            "A fast-over-slow crossover does not require current price to be above both averages."
+          ]
+        },
+        {
+          "number": 2,
+          "title": "Momentum and Rate-of-Change Indicators",
+          "ids": [
+            "QF2-D2G2Q1",
+            "QF2-D2G2Q2",
+            "QF2-D2G2Q3"
+          ],
+          "page": 607,
+          "rules": [
+            "Momentum P_t/P_(t−L) − 1 measures the endpoint return over lookback L.",
+            "The same endpoint return can conceal different paths, volatility, and drawdowns.",
+            "A large old move leaving the window can sharply change the indicator even when current price barely changes."
+          ],
+          "traps": [
+            "Positive trailing momentum does not guarantee positive future return.",
+            "A reversal can begin while a long-horizon momentum rank is still high."
+          ]
+        },
+        {
+          "number": 3,
+          "title": "Bollinger Bands and Volatility-Based Indicators",
+          "ids": [
+            "QF2-D2G3Q1",
+            "QF2-D2G3Q2",
+            "QF2-D2G3Q3"
+          ],
+          "page": 609,
+          "rules": [
+            "Bands are a rolling center plus or minus a chosen multiple of rolling standard deviation.",
+            "With the multiplier fixed, widening bands indicate higher measured dispersion, not automatically higher expected return.",
+            "A lower-band buy embeds a mean-reversion assumption; persistent trends can keep price near or beyond a band."
+          ],
+          "traps": [
+            "A two-standard-deviation band is not an impossible-to-breach boundary.",
+            "An upper-band breach alone does not establish that shorting is correct."
+          ]
+        },
+        {
+          "number": 4,
+          "title": "Relative Strength and Oscillator-Style Indicators",
+          "ids": [
+            "QF2-D2G4Q1",
+            "QF2-D2G4Q2",
+            "QF2-D2G4Q3"
+          ],
+          "page": 611,
+          "rules": [
+            "Overbought and oversold labels identify regions of a chosen oscillator, not certain reversal points.",
+            "A return below an upper threshold seeks confirmation of weakening strength and can delay entry.",
+            "Divergence compares price and oscillator behavior; its interpretation depends on construction and lookback."
+          ],
+          "traps": [
+            "A bounded indicator does not bound the underlying asset’s losses.",
+            "Neither divergence nor confirmation replaces a complete tested trading rule."
+          ]
+        },
+        {
+          "number": 5,
+          "title": "Indicator Normalization and Comparability",
+          "ids": [
+            "QF2-D2G5Q1",
+            "QF2-D2G5Q2",
+            "QF2-D2G5Q3"
+          ],
+          "page": 613,
+          "rules": [
+            "Divide dollar changes by starting prices for comparable percentage moves.",
+            "A z-score measures distance from the selected mean in units of the selected standard deviation.",
+            "Ranks preserve ordering and reduce extreme magnitude dominance but lose numerical spacing."
+          ],
+          "traps": [
+            "Standardization does not eliminate nonstationarity or make a forecast valid.",
+            "Top-ranked assets need not have positive absolute expected returns."
+          ]
+        },
+        {
+          "number": 6,
+          "title": "Lookback Windows, Lag, and Responsiveness",
+          "ids": [
+            "QF2-D2G6Q1",
+            "QF2-D2G6Q2",
+            "QF2-D2G6Q3"
+          ],
+          "page": 615,
+          "rules": [
+            "The effective memory of an indicator determines how quickly old-regime data leave it.",
+            "Faster reaction may raise noise sensitivity and turnover; smoothing may delay recognition of a real change.",
+            "Assess nearby lookbacks and untouched periods to distinguish a stable region from a lucky parameter peak."
+          ],
+          "traps": [
+            "Slow adjustment is not automatically a software bug.",
+            "The exact best in-sample lookback is not automatically the best live choice."
+          ]
+        },
+        {
+          "number": 7,
+          "title": "Combining Indicators into Trading Signals",
+          "ids": [
+            "QF2-D2G7Q1",
+            "QF2-D2G7Q2",
+            "QF2-D2G7Q3"
+          ],
+          "page": 617,
+          "rules": [
+            "Inspect correlation and incremental predictive value before treating multiple indicators as independent confirmations.",
+            "Specify how conflicting signals map to one executable position or to a decision to wait.",
+            "Validate the combined signal, thresholds, risk controls, and net returns as a whole.",
+            "Align component scales and directions before averaging; a composite crossing zero repeatedly can generate costly churn."
+          ],
+          "traps": [
+            "Three trend indicators do not necessarily provide three independent sources of information.",
+            "Agreement or disagreement alone does not prove a profitable strategy."
+          ]
+        }
+      ],
+      "formulas": [
+        {
+          "name": "Simple moving average",
+          "formula": "SMA_t(n) = (1/n) Σ P_(t−j), j = 0,…,n−1",
+          "conditions": "A trailing window; define warm-up behavior and the decision timestamp."
+        },
+        {
+          "name": "Exponential moving average",
+          "formula": "EMA_t = αP_t + (1−α)EMA_(t−1); commonly α = 2/(n+1)",
+          "conditions": "Specify initialization and convention; nominal n does not make EMA identical to an n-period SMA."
+        },
+        {
+          "name": "Momentum / rate of change",
+          "formula": "M_t(L) = P_t / P_(t−L) − 1",
+          "conditions": "Positive comparable prices; an endpoint statistic, not a forecast guarantee."
+        },
+        {
+          "name": "Bollinger Bands",
+          "formula": "Upper = μ_t + kσ_t; Lower = μ_t − kσ_t; width = 2kσ_t",
+          "conditions": "μ_t and σ_t use the same defined trailing price window; k is chosen, often 2."
+        },
+        {
+          "name": "Normalized location",
+          "formula": "z = (x − μ)/σ; %B = (P − Lower)/(Upper − Lower)",
+          "conditions": "σ and band width must be nonzero; z uses standard deviations, whereas %B is band position and may exceed [0,1]."
+        },
+        {
+          "name": "Lecture Bollinger value",
+          "formula": "BB = (P − SMA)/(2σ) = z/2; for k = 2, %B = (BB + 1)/2",
+          "conditions": "The course uses BB = −1 at the lower two-sigma band, 0 at the mean, and +1 at the upper band. This differs from z-score and percent-B; all require a nonzero denominator."
+        }
+      ],
+      "examples": [
+        {
+          "title": "Bollinger arithmetic before interpretation",
+          "prompt": "Rolling mean is $100, standard deviation is $4, k = 2, and price closes at $109.",
+          "work": "Upper = 100 + 2×4 = $108; lower = $92. Price is $1 above the upper band. The z-score is (109−100)/4 = 2.25, lecture BB = 9/8 = 1.125, and %B = 17/16 = 1.0625.",
+          "result": "The arithmetic establishes a breach; continuation versus reversal still needs a tested hypothesis.",
+          "id": "QF2-D2G3Q1",
+          "page": 609
+        },
+        {
+          "title": "Compare unusualness, not raw size",
+          "prompt": "Market A has signal 4, mean 1, standard deviation 1.5; B has signal 8, mean 6, standard deviation 0.5.",
+          "work": "z_A = (4−1)/1.5 = 2. z_B = (8−6)/0.5 = 4. B is farther above its own reference mean in standardized units.",
+          "result": "B is more unusual relative to its estimated distribution; this is not proof of a larger future profit.",
+          "id": "QF2-D2G5Q2",
+          "page": 614
+        },
+        {
+          "title": "Percentage momentum changes the ranking",
+          "prompt": "A $20 stock gains $2, while a $400 stock gains $8.",
+          "work": "The raw change favors the second stock 8 to 2, but returns are 2/20 = 10% and 8/400 = 2%.",
+          "result": "The first stock ranks higher by percentage momentum.",
+          "id": "QF2-D2G5Q1",
+          "page": 613
+        }
+      ]
+    },
+    {
+      "id": "QF2-D3",
+      "subject": "QF",
+      "number": 3,
+      "title": "Alpha Research and Formulaic Signals",
+      "count": 21,
+      "page": 622,
+      "core": [
+        {
+          "title": "Define exactly what the alpha predicts",
+          "text": "An alpha can be an expected benchmark-relative return, a relative ranking, or another score. State its units, benchmark, horizon, and information time before interpreting its magnitude. A high score is a forecast rather than a realized return. Forecast confidence can differ even when point estimates match, and unitless scores need calibration before proportional sizing."
+        },
+        {
+          "title": "Absolute and relative forecasts differ",
+          "text": "A time-series signal evaluates an asset against its own history or predicts its own future direction. A cross-sectional signal orders assets at the same date. The weakest-ranked asset can still have positive expected absolute return, and a directional rule can make every position long. Market neutrality comes from portfolio construction and exposure control, not from the mere use of ranks."
+        },
+        {
+          "title": "Transformations need an economic purpose",
+          "text": "Ranks reduce scale dominance but discard distances; z-scores standardize relative to estimated location and dispersion; winsorization caps extremes; neutralization removes fitted exposure to a chosen variable. These operations do not create skill. Formulaic combinations must specify units, signs, missing values, near-zero denominators, and lookbacks, then justify added complexity through independent evidence."
+        },
+        {
+          "title": "Measure what remains after implementation",
+          "text": "Predictive strength decays with signal age, while refreshing positions incurs turnover and costs. Correlated alphas add less information than their count suggests, though averaging nearby specifications may improve robustness. Crowding can accelerate price adjustment and synchronize exits. Evaluate a composite’s marginal contribution, stability, execution horizon, and capacity rather than extrapolating gross backtest alpha."
+        }
+      ],
+      "groups": [
+        {
+          "number": 1,
+          "title": "Defining and Interpreting Alpha Signals",
+          "ids": [
+            "QF2-D3G1Q1",
+            "QF2-D3G1Q2",
+            "QF2-D3G1Q3"
+          ],
+          "page": 622,
+          "rules": [
+            "Specify whether a score is an expected active return, a rank, or an uncalibrated number, and state its horizon.",
+            "Judge a forecast using subsequent outcomes over the stated horizon, not one unrelated prior-day loss.",
+            "Sizing can reflect forecast confidence, risk, and constraints in addition to the point estimate."
+          ],
+          "traps": [
+            "A rank of 80 does not imply twice the expected return of rank 40.",
+            "A confident forecast does not guarantee a positive realized return."
+          ]
+        },
+        {
+          "number": 2,
+          "title": "Time-Series vs. Cross-Sectional Signals",
+          "ids": [
+            "QF2-D3G2Q1",
+            "QF2-D3G2Q2",
+            "QF2-D3G2Q3"
+          ],
+          "page": 624,
+          "rules": [
+            "Time-series direction and cross-sectional relative attractiveness answer different questions.",
+            "A bottom-ranked asset can be shorted in a relative strategy even when its absolute forecast is positive.",
+            "Align scales and horizons when combining signal types, then explicitly enforce portfolio exposures."
+          ],
+          "traps": [
+            "Cross-sectional ranks do not inherently guarantee dollar or market neutrality.",
+            "Using one signal of each type does not guarantee independence."
+          ]
+        },
+        {
+          "number": 3,
+          "title": "Ranking, Scaling, and Signal Transformation",
+          "ids": [
+            "QF2-D3G3Q1",
+            "QF2-D3G3Q2",
+            "QF2-D3G3Q3"
+          ],
+          "page": 626,
+          "rules": [
+            "Percentile ranks preserve within-group ordering; within-industry ranking can reduce unintended industry dominance.",
+            "Z-scores are sensitive to estimated means, dispersion, and outliers; winsorization caps chosen extremes.",
+            "Residualizing against size removes the fitted linear size-related component, which may include useful information."
+          ],
+          "traps": [
+            "Ranks do not preserve expected-return distances.",
+            "Winsorization and neutralization do not guarantee clean data or improved out-of-sample alpha."
+          ]
+        },
+        {
+          "number": 4,
+          "title": "Formulaic Alpha Construction",
+          "ids": [
+            "QF2-D3G4Q1",
+            "QF2-D3G4Q2",
+            "QF2-D3G4Q3"
+          ],
+          "page": 628,
+          "rules": [
+            "Fully define formula units, sign behavior, lookbacks, missing values, and denominator safeguards.",
+            "Dividing by volatility changes scaling and can produce unstable values when volatility approaches zero.",
+            "Require independent incremental benefit from added transformations and test nearby parameter combinations."
+          ],
+          "traps": [
+            "Multiplying plausible indicators does not establish predictiveness.",
+            "Many nonlinear variants increase the chance of selecting noise; monotonic variants may preserve the same ranking."
+          ]
+        },
+        {
+          "number": 5,
+          "title": "Signal Decay and Holding Period",
+          "ids": [
+            "QF2-D3G5Q1",
+            "QF2-D3G5Q2",
+            "QF2-D3G5Q3"
+          ],
+          "page": 630,
+          "rules": [
+            "Estimate predictive value by signal age and align entry, exit, and return targets with that decay.",
+            "A longer hold can reduce costs while leaving capital exposed after demonstrated alpha has disappeared.",
+            "Choose rebalancing using net benefit, liquidity, and decay; evaluate staggered updates when appropriate."
+          ],
+          "traps": [
+            "Strong 30-minute IC does not establish a once-daily strategy.",
+            "The horizon with the highest gross IC need not maximize net returns."
+          ]
+        },
+        {
+          "number": 6,
+          "title": "Combining Multiple Alpha Signals",
+          "ids": [
+            "QF2-D3G6Q1",
+            "QF2-D3G6Q2",
+            "QF2-D3G6Q3"
+          ],
+          "page": 632,
+          "rules": [
+            "Combine signals using both predictive reliability and incremental information beyond existing signals.",
+            "Correlation, estimation uncertainty, turnover, and costs can change sensible weights from a simple IC-proportional rule.",
+            "Averaging overlapping lookbacks can improve parameter robustness without adding equivalent independent breadth."
+          ],
+          "traps": [
+            "Equal signal weights do not imply equal portfolio risk contributions.",
+            "The weakest standalone alpha may still help if it is complementary and inexpensive."
+          ]
+        },
+        {
+          "number": 7,
+          "title": "Crowding, Replication, and Realizable Alpha",
+          "ids": [
+            "QF2-D3G7Q1",
+            "QF2-D3G7Q2",
+            "QF2-D3G7Q3"
+          ],
+          "page": 634,
+          "rules": [
+            "Replication can bring price adjustment forward and reduce the remaining return available to later traders.",
+            "Larger capital and crowded positions can increase impact, capacity pressure, and synchronized exit risk.",
+            "Use economic rationale, point-in-time testing, and cross-period robustness to guide further research."
+          ],
+          "traps": [
+            "Historical gross alpha is not guaranteed to persist after widespread adoption.",
+            "A lack of rationale is not mathematical proof of no signal, but a spectacular searched backtest needs stronger validation."
+          ]
+        }
+      ],
+      "formulas": [
+        {
+          "name": "Active return target",
+          "formula": "r_active = r_asset − r_benchmark",
+          "conditions": "Specify benchmark and forecast horizon; a score may only rank this quantity rather than estimate it in return units."
+        },
+        {
+          "name": "Cross-sectional z-score",
+          "formula": "z_i,t = (x_i,t − mean_t(x)) / sd_t(x)",
+          "conditions": "Uses the stated same-date universe; extreme data can distort both location and dispersion."
+        },
+        {
+          "name": "Linear neutralization",
+          "formula": "x_i = a + b·size_i + ε_i; neutralized signal = ε_i",
+          "conditions": "Residual orthogonality is an in-sample fitted linear property, not guaranteed future neutrality."
+        },
+        {
+          "name": "Illustrative price-volume alpha",
+          "formula": "α_t = M_t(20) × [V_t / mean_t(V)] / σ_t",
+          "conditions": "Define all windows, positive denominator floors, units, and timestamps; this formula is a hypothesis, not established alpha."
+        },
+        {
+          "name": "Composite alpha",
+          "formula": "α_composite = Σ w_j z_j",
+          "conditions": "Standardization aligns scale; weights still require attention to reliability, dependence, decay, and implementation cost."
+        }
+      ],
+      "examples": [
+        {
+          "title": "Read a formula’s sensitivity",
+          "prompt": "A proposed alpha multiplies 20-day return by relative volume and divides by volatility. Illustrate with return 0.10, relative volume 1.5, and volatility 0.20.",
+          "work": "Score = 0.10×1.5/0.20 = 0.75. Holding other values fixed, volatility 0.10 gives 1.50. If the denominator approaches zero, the raw score becomes unstable.",
+          "result": "The calculation explains scale and the need for a denominator safeguard; 0.75 is not a 75% expected return.",
+          "id": "QF2-D3G4Q1",
+          "page": 628
+        },
+        {
+          "title": "Relative shorts during a broad rally",
+          "prompt": "All 100 stocks have positive forecasts. A relative strategy buys the top decile and shorts the bottom decile.",
+          "work": "In an illustration, top-decile stocks gain 8% and bottom-decile stocks gain 3%. A $100 long and $100 short produce $8−$3 = $5 before costs, although both groups rose.",
+          "result": "Relative spread performance can be positive while the short leg loses; dollar neutrality does not guarantee factor neutrality.",
+          "id": "QF2-D3G2Q2",
+          "page": 624
+        },
+        {
+          "title": "Weakest standalone can still diversify",
+          "prompt": "Three standardized alphas have IC estimates 0.06, 0.04, and 0.02; the first two are highly correlated and the third trades less.",
+          "work": "IC-proportional weights normalize to 50%, 33.3%, and 16.7%, but those weights ignore redundancy, estimation uncertainty, and costs. Test the third signal’s incremental net contribution rather than discarding it.",
+          "result": "The largest IC is not sufficient to determine the best composite weight.",
+          "id": "QF2-D3G6Q2",
+          "page": 633
+        }
+      ]
+    },
+    {
+      "id": "QF2-D4",
+      "subject": "QF",
+      "number": 4,
+      "title": "Fundamental Law of Active Portfolio Management",
+      "count": 21,
+      "page": 639,
+      "core": [
+        {
+          "title": "IC measures forecast association",
+          "text": "The information coefficient is the correlation between forecasts and subsequent outcomes defined on a consistent universe and horizon. A small positive IC can be useful if persistent and applied across sufficiently independent opportunities. It is not a hit rate or a return. A negative IC can contain inverted information, while zero linear correlation does not rule out every nonlinear relationship."
+        },
+        {
+          "title": "IR measures active efficiency",
+          "text": "The information ratio divides average benchmark-relative return by the volatility of that active return, called tracking error. Sharpe instead compares total portfolio return with a risk-free reference and uses total volatility. Equal historical IR values do not establish equal reliability: sample length, benchmark choice, concentration, costs, and regimes affect interpretation."
+        },
+        {
+          "title": "Independent breadth is the multiplier",
+          "text": "The simplified Fundamental Law relates IR to IC times the square root of breadth. Skill enters linearly; independent opportunity count enters through a square root. Breadth can come from assets or time, but correlated securities, overlapping horizons, and near-duplicate signals reduce effective breadth. Counting trades or formula columns mechanically overstates the independent decisions."
+        },
+        {
+          "title": "A design relationship, with assumptions",
+          "text": "The simplified law assumes sufficiently stable skill, comparable independent opportunities, and efficient translation of forecasts into positions. More coverage may dilute expertise; automation may replicate the same bet. Constraints, trading costs, impact, funding, and crowding can reduce realized performance. Test skill and dependence at the scale and horizon actually contemplated."
+        }
+      ],
+      "groups": [
+        {
+          "number": 1,
+          "title": "Information Coefficient",
+          "ids": [
+            "QF2-D4G1Q1",
+            "QF2-D4G1Q2",
+            "QF2-D4G1Q3"
+          ],
+          "page": 639,
+          "rules": [
+            "IC is correlation between matched forecasts and subsequent outcomes, not the percentage of correct trades.",
+            "Judge IC together with effective sample size, regime coverage, consistent definitions, and uncertainty.",
+            "Negating forecasts reverses their correlation with the same outcomes; investigate timing and labels before deploying a reversed signal."
+          ],
+          "traps": [
+            "A larger point estimate from a tiny sample is not automatically more credible.",
+            "IC near zero does not prove that all nonlinear information is absent."
+          ]
+        },
+        {
+          "number": 2,
+          "title": "Information Ratio",
+          "ids": [
+            "QF2-D4G2Q1",
+            "QF2-D4G2Q2",
+            "QF2-D4G2Q3"
+          ],
+          "page": 641,
+          "rules": [
+            "IR uses mean active return divided by tracking error on a consistent frequency basis.",
+            "Sharpe uses excess total return over the risk-free rate divided by total volatility.",
+            "Consider benchmark suitability, sample duration, factor concentration, and net costs when comparing historical ratios."
+          ],
+          "traps": [
+            "Higher active return alone does not imply a higher IR.",
+            "Equal historical IR does not guarantee equal future skill or dollar profit."
+          ]
+        },
+        {
+          "number": 3,
+          "title": "Breadth and Number of Opportunities",
+          "ids": [
+            "QF2-D4G3Q1",
+            "QF2-D4G3Q2",
+            "QF2-D4G3Q3"
+          ],
+          "page": 643,
+          "rules": [
+            "Breadth counts sufficiently independent opportunities to apply skill across assets and time.",
+            "Correlated daily decisions can add much less effective breadth than the increase in raw forecast count.",
+            "Automation expands processing capacity, but new decisions still need skill and realizability."
+          ],
+          "traps": [
+            "Securities held, orders submitted, and independent bets are different quantities.",
+            "Adding opportunities with no skill does not mechanically improve IR."
+          ]
+        },
+        {
+          "number": 4,
+          "title": "The Fundamental Law Relationship",
+          "ids": [
+            "QF2-D4G4Q1",
+            "QF2-D4G4Q2",
+            "QF2-D4G4Q3"
+          ],
+          "page": 645,
+          "rules": [
+            "Use IR ≈ IC√BR only under the stated simplifying assumptions and consistent annual breadth.",
+            "Doubling IC doubles predicted IR; doubling breadth multiplies it by √2.",
+            "To double IR through breadth alone, quadruple effective breadth while preserving IC."
+          ],
+          "traps": [
+            "A stronger IC can be outweighed by much lower breadth.",
+            "The equation does not guarantee that new independent opportunities can be created costlessly."
+          ]
+        },
+        {
+          "number": 5,
+          "title": "Effective Breadth and Dependence",
+          "ids": [
+            "QF2-D4G5Q1",
+            "QF2-D4G5Q2",
+            "QF2-D4G5Q3"
+          ],
+          "page": 647,
+          "rules": [
+            "Common factors can make many stock positions versions of one economic bet.",
+            "Near-duplicate signals may change robustness or scaling without adding much independent information.",
+            "Inspect stressed correlations and conditional exposures because effective diversification can decline in crises."
+          ],
+          "traps": [
+            "Different company or asset-class names do not establish independence.",
+            "Zero full-sample correlation does not imply independence in every regime."
+          ]
+        },
+        {
+          "number": 6,
+          "title": "Skill vs. Scale Tradeoffs",
+          "ids": [
+            "QF2-D4G6Q1",
+            "QF2-D4G6Q2",
+            "QF2-D4G6Q3"
+          ],
+          "page": 649,
+          "rules": [
+            "Compare changes in both IC and effective breadth when expanding a strategy.",
+            "A fourfold breadth increase offsets a halving of IC in the simplified relationship.",
+            "Validate new universes and horizons because liquidity, data quality, and mechanisms can differ."
+          ],
+          "traps": [
+            "Higher skill alone does not ensure higher predicted IR.",
+            "Automation does not preserve the original IC by assumption."
+          ]
+        },
+        {
+          "number": 7,
+          "title": "Limitations and Practical Violations",
+          "ids": [
+            "QF2-D4G7Q1",
+            "QF2-D4G7Q2",
+            "QF2-D4G7Q3"
+          ],
+          "page": 651,
+          "rules": [
+            "Re-estimate rolling and out-of-sample skill when competition or regimes change.",
+            "Account for dependence, costs, constraints, capacity, and turnover before treating gross potential as attainable.",
+            "Use gaps between predicted and live results to diagnose translation and implementation assumptions."
+          ],
+          "traps": [
+            "A live IR below the simplified-law prediction need not mean the arithmetic was wrong.",
+            "Unlimited liquidity and raw decision-count breadth are optimistic assumptions for crowded small-cap trading."
+          ]
+        }
+      ],
+      "formulas": [
+        {
+          "name": "Information coefficient",
+          "formula": "IC = Corr(forecast_i, subsequent active return_i)",
+          "conditions": "Use matched horizon, universe, and information time; the effective sample may be smaller than the row count."
+        },
+        {
+          "name": "Information ratio",
+          "formula": "IR = mean(r_p − r_b) / sd(r_p − r_b)",
+          "conditions": "Numerator and tracking-error denominator must use consistent horizons and annualization."
+        },
+        {
+          "name": "Simplified Fundamental Law",
+          "formula": "IR ≈ IC × √BR",
+          "conditions": "BR is effective independent opportunities per year; assumes stable comparable skill and efficient implementation before practical frictions."
+        },
+        {
+          "name": "Comparative Fundamental Law",
+          "formula": "IR_new / IR_old = (IC_new / IC_old) × √(BR_new / BR_old)",
+          "conditions": "Same assumptions and comparable definitions; nonzero old IC and IR."
+        },
+        {
+          "name": "Breadth required for a target",
+          "formula": "BR_required = (IR_target / IC)²",
+          "conditions": "An algebraic implication for positive fixed IC, not proof the required breadth exists."
+        }
+      ],
+      "examples": [
+        {
+          "title": "Skill and breadth together",
+          "prompt": "Strategy A has IC 0.04 and breadth 400. B has IC 0.08 and breadth 25.",
+          "work": "IR_A = 0.04×20 = 0.80. IR_B = 0.08×5 = 0.40. B has twice the skill but one-sixteenth the breadth.",
+          "result": "A has twice the simplified predicted IR; actual net performance remains conditional on implementation.",
+          "id": "QF2-D4G4Q2",
+          "page": 646
+        },
+        {
+          "title": "Double IR through independent breadth",
+          "prompt": "Current effective breadth is 64. IC remains unchanged and management wants twice the predicted IR.",
+          "work": "The current multiplier is √64 = 8. Doubling it requires 16, so breadth must be 16² = 256. Breadth 128 only gives a √2 ≈ 1.414 increase.",
+          "result": "Quadruple breadth from 64 to 256.",
+          "id": "QF2-D4G4Q3",
+          "page": 646
+        },
+        {
+          "title": "Return per active risk",
+          "prompt": "Fund 1 earns 4% active return with 8% tracking error; fund 2 earns 3% with 3% tracking error.",
+          "work": "IR_1 = 4/8 = 0.50. IR_2 = 3/3 = 1.00. The second has lower raw active return but twice the return per unit of active risk.",
+          "result": "Fund 2 has the higher information ratio under the stated consistent measurements.",
+          "id": "QF2-D4G2Q1",
+          "page": 641
+        }
+      ]
+    },
+    {
+      "id": "QF2-D5",
+      "subject": "QF",
+      "number": 5,
+      "title": "Advanced Portfolio Construction",
+      "count": 21,
+      "page": 656,
+      "core": [
+        {
+          "title": "Forecasts need a position rule",
+          "text": "A positive forecast can map to a long position, a negative forecast to a short, or an active view to an overweight or underweight. A linear rule preserves magnitude; a sign rule discards it. The same forecast produces different portfolios under different constraints. Risk, confidence, existing holdings, and feasibility determine how much of the forecast can sensibly be expressed."
+        },
+        {
+          "title": "Measure active exposure and total risk",
+          "text": "Active weight equals portfolio weight minus benchmark weight. A negative active weight can arise from a positive holding below its benchmark allocation. Gross exposure sums absolute positions; net exposure sums signed positions. Neither zero net dollars nor equal capital weights establishes low or equal risk. Portfolio risk depends on covariances and common factor exposures."
+        },
+        {
+          "title": "Treat estimated optima with care",
+          "text": "Expected returns and covariances are estimates. Small input changes that create extreme weight changes reveal sensitivity, not certainty. Shrinkage, regularization, caps, and scenario checks can reduce overreaction to noise, sometimes sacrificing an optimistic in-sample objective for more stable allocations. Robust allocation does not require equal weights in every asset."
+        },
+        {
+          "title": "The best feasible update may be no trade",
+          "text": "Leverage, sector, short-sale, liquidity, position, and turnover limits define the feasible set. Rebalancing incurs costs on the difference between current and target holdings. When a small expected improvement costs more to implement than it is worth, a no-trade band or turnover penalty can favor retaining current positions. Turnover reduction remains subordinate to net value and risk needs."
+        }
+      ],
+      "groups": [
+        {
+          "number": 1,
+          "title": "Translating Forecasts into Positions",
+          "ids": [
+            "QF2-D5G1Q1",
+            "QF2-D5G1Q2",
+            "QF2-D5G1Q3"
+          ],
+          "page": 656,
+          "rules": [
+            "A linear forecast-to-position rule preserves relative magnitudes before constraints and normalization.",
+            "A sign-based rule keeps direction but assigns equal raw magnitude within each sign.",
+            "Long-only funds can express negative relative views through underweights while maintaining nonnegative holdings."
+          ],
+          "traps": [
+            "Zero forecast does not imply the largest position.",
+            "Equal gross exposure does not guarantee equal portfolio risk."
+          ]
+        },
+        {
+          "number": 2,
+          "title": "Position Sizing and Conviction",
+          "ids": [
+            "QF2-D5G2Q1",
+            "QF2-D5G2Q2",
+            "QF2-D5G2Q3"
+          ],
+          "page": 658,
+          "rules": [
+            "Size using both forecast strength and risk; the stated independent-asset rule μ/σ² uses variance, not volatility.",
+            "Confidence scaling can reduce a less reliable forecast’s position without reversing its sign.",
+            "Position caps can limit concentration driven by noisy point estimates and make an unconstrained solution infeasible."
+          ],
+          "traps": [
+            "An 80% confidence label is not automatically an 80% probability of profit.",
+            "Equal expected returns need not imply equal position sizes."
+          ]
+        },
+        {
+          "number": 3,
+          "title": "Active vs. Benchmark-Relative Weights",
+          "ids": [
+            "QF2-D5G3Q1",
+            "QF2-D5G3Q2",
+            "QF2-D5G3Q3"
+          ],
+          "page": 660,
+          "rules": [
+            "Active weights subtract benchmark weights from actual holdings.",
+            "A zero holding in a benchmark constituent is a negative active weight, not a short holding.",
+            "Assess tracking error using active weights and covariance; active share measures composition difference."
+          ],
+          "traps": [
+            "Zero net dollar exposure can still conceal high gross exposure and systematic risk.",
+            "High active share does not guarantee positive active return."
+          ]
+        },
+        {
+          "number": 4,
+          "title": "Risk-Aware Portfolio Construction",
+          "ids": [
+            "QF2-D5G4Q1",
+            "QF2-D5G4Q2",
+            "QF2-D5G4Q3"
+          ],
+          "page": 662,
+          "rules": [
+            "Portfolio variance depends on covariance among positions as well as each position’s volatility.",
+            "Equal dollar allocations or equal standalone volatilities do not imply equal contributions to portfolio risk.",
+            "Inspect correlations and common exposures across strategy sleeves even when they hold different securities."
+          ],
+          "traps": [
+            "Portfolio volatility is not generally the weighted average of asset volatilities.",
+            "Negative estimated correlation does not guarantee perfect future offsetting returns."
+          ]
+        },
+        {
+          "number": 5,
+          "title": "Constraints and Implementability",
+          "ids": [
+            "QF2-D5G5Q1",
+            "QF2-D5G5Q2",
+            "QF2-D5G5Q3"
+          ],
+          "page": 664,
+          "rules": [
+            "Apply gross, net, position, sector, short-sale, liquidity, and turnover constraints separately.",
+            "A sector or liquidity limit can constrain a strong forecast even when individual signals were estimated independently.",
+            "Daily participation limits apply to total trading; splitting a parent order into child orders does not reduce aggregate participation."
+          ],
+          "traps": [
+            "A 100% net portfolio can violate a 150% gross-exposure cap.",
+            "Removing a real constraint merely because it lowers backtest return does not make a portfolio implementable."
+          ]
+        },
+        {
+          "number": 6,
+          "title": "Forecast Uncertainty and Robustness",
+          "ids": [
+            "QF2-D5G6Q1",
+            "QF2-D5G6Q2",
+            "QF2-D5G6Q3"
+          ],
+          "page": 666,
+          "rules": [
+            "Large weight changes after small forecast revisions warrant sensitivity analysis.",
+            "Shrinkage and penalties can reduce concentration and turnover caused by uncertain inputs.",
+            "Compare robust and unconstrained methods on rolling out-of-sample periods and plausible perturbations."
+          ],
+          "traps": [
+            "An extreme optimizer weight is not evidence that the forecast is correct.",
+            "Leverage amplifies the consequences of forecast error rather than removing uncertainty."
+          ]
+        },
+        {
+          "number": 7,
+          "title": "Optimization with Costs and Turnover",
+          "ids": [
+            "QF2-D5G7Q1",
+            "QF2-D5G7Q2",
+            "QF2-D5G7Q3"
+          ],
+          "page": 668,
+          "rules": [
+            "Costs depend on trades from current holdings, so the starting portfolio is part of the optimization problem.",
+            "A no-trade region can retain a position when incremental expected benefit is smaller than implementation cost.",
+            "Entry or reversal thresholds and turnover penalties can reduce churn from weak noisy forecasts."
+          ],
+          "traps": [
+            "Any deviation from a frictionless target does not automatically justify trading.",
+            "Minimizing turnover at all costs can sacrifice valuable trades or needed risk reduction."
+          ]
+        }
+      ],
+      "formulas": [
+        {
+          "name": "Active weight and active share",
+          "formula": "a_i = w_i − b_i; Active Share = ½ Σ|a_i|",
+          "conditions": "Active Share convention applies to comparable fully invested portfolio and benchmark weights; it is not tracking error."
+        },
+        {
+          "name": "Gross and net exposure",
+          "formula": "Gross = Σ|w_i|; Net = Σw_i",
+          "conditions": "Weights are signed exposures relative to the same capital base; positive longs and negative shorts."
+        },
+        {
+          "name": "Portfolio and active risk",
+          "formula": "σ_p² = wᵀΣw; TE² = (w−b)ᵀΣ(w−b)",
+          "conditions": "Σ is the covariance matrix on the chosen horizon; both estimates can change across regimes."
+        },
+        {
+          "name": "Two-asset portfolio variance",
+          "formula": "σ_p² = w₁²σ₁² + w₂²σ₂² + 2w₁w₂ρ₁₂σ₁σ₂",
+          "conditions": "Use consistent horizons and correlations; diversification comes through the covariance term."
+        },
+        {
+          "name": "Illustrative independent-asset sizing",
+          "formula": "raw w_i ∝ μ_i / σ_i²; confidence-scaled target ∝ c_i × raw w_i",
+          "conditions": "The question’s simplified rule assumes independent assets and comparable forecasts; constraints and normalization come afterward."
+        },
+        {
+          "name": "Cost-aware allocation objective",
+          "formula": "maximize_w [μᵀw − (λ/2)wᵀΣw − C(w−w_current)]",
+          "conditions": "Illustrative mean-variance objective subject to mandate constraints; C includes implementation costs and/or turnover penalties."
+        }
+      ],
+      "examples": [
+        {
+          "title": "Variance-based sizing",
+          "prompt": "Two independent stocks each have 6% expected excess return; H has volatility 30% and L 15%.",
+          "work": "Raw H score = 0.06/0.30² = 0.667; L = 0.06/0.15² = 2.667. L/H = 4. Halving volatility quarters variance.",
+          "result": "The stated μ/σ² rule assigns L four times H’s raw size, before constraints.",
+          "id": "QF2-D5G2Q1",
+          "page": 658
+        },
+        {
+          "title": "Underweight is not short",
+          "prompt": "Benchmark weights are A 5%, B 3%, C 0%; portfolio weights are 8%, 1%, 2%.",
+          "work": "Active weights are +3, −2, and +2 percentage points. B is still a positive 1% holding despite its −2-point active weight. The remaining portfolio is not shown.",
+          "result": "B expresses a negative relative view without a short sale; full-portfolio active share cannot be computed from only these rows.",
+          "id": "QF2-D5G3Q1",
+          "page": 660
+        },
+        {
+          "title": "Correlation changes portfolio risk",
+          "prompt": "Both assets have 20% volatility and equal 50% weights. Compare correlation +0.90 with −0.20.",
+          "work": "Variance = 0.5×0.20²×(1+ρ). For ρ = 0.90, σ ≈ √0.038 = 19.49%. For ρ = −0.20, σ ≈ √0.016 = 12.65%.",
+          "result": "The lower-correlation pair has materially lower estimated risk despite identical individual volatilities.",
+          "id": "QF2-D5G4Q1",
+          "page": 662
+        }
+      ]
+    },
+    {
+      "id": "QF2-D6",
+      "subject": "QF",
+      "number": 6,
+      "title": "Strategy Evaluation and Performance Attribution",
+      "count": 21,
+      "page": 673,
+      "core": [
+        {
+          "title": "Benchmark the economic claim",
+          "text": "A useful benchmark reflects the strategy’s opportunity set, market exposure, permissions, dates, and implementation assumptions. Cash, buy-and-hold, a market index, a simple manual rule, and factor benchmarks answer different questions. A long-only stock strategy beating cash may largely be earning market exposure; a near-market-neutral strategy needs more context than a comparison with a stock index."
+        },
+        {
+          "title": "Preserve independent evidence",
+          "text": "Any data used to choose features, parameters, or trading rules belong to development. Changing a strategy after inspecting a holdout makes that period part of selection for the revision. Walk-forward evaluation can test a scheduled retraining process, provided every feature and fit respects information availability. Retraining does not make the resulting test returns statistically independent."
+        },
+        {
+          "title": "Describe both return and its path",
+          "text": "Cumulative return records ending wealth; volatility measures periodic dispersion; drawdown records the loss from a previous peak. Sharpe, Sortino, and information ratios use different risk denominators and reference returns. Identical headline returns or ratios can conceal different paths, tails, sample lengths, and exposures. No single metric proves a strategy is suitable or robust."
+        },
+        {
+          "title": "Separate sources, costs, and confidence",
+          "text": "Attribution distinguishes beta, sectors, factors, selection, and timing from unexplained performance. Net return subtracts the costs required by trading behavior. A strategy can have a positive mean without strong statistical evidence or adequate dollar profit. Test subperiods, regimes, parameter neighborhoods, cost assumptions, and dependence on a few extreme trades before treating a backtest as repeatable."
+        }
+      ],
+      "groups": [
+        {
+          "number": 1,
+          "title": "Benchmark Selection",
+          "ids": [
+            "QF2-D6G1Q1",
+            "QF2-D6G1Q2",
+            "QF2-D6G1Q3"
+          ],
+          "page": 673,
+          "rules": [
+            "Choose benchmarks that match the strategy’s market exposure, opportunity set, and permissions.",
+            "Use identical dates, initial capital, and consistent cost assumptions to compare learned, manual, and passive rules.",
+            "Use multiple relevant references when they isolate different claims about value added."
+          ],
+          "traps": [
+            "Beating cash by 9 percentage points does not establish 9 points of stock-selection alpha.",
+            "A convenient weak benchmark exaggerates apparent success."
+          ]
+        },
+        {
+          "number": 2,
+          "title": "In-Sample vs. Out-of-Sample Evaluation",
+          "ids": [
+            "QF2-D6G2Q1",
+            "QF2-D6G2Q2",
+            "QF2-D6G2Q3"
+          ],
+          "page": 675,
+          "rules": [
+            "Data that influence any design or parameter choice are in-sample for that choice.",
+            "Freeze the candidate before an untouched test; a revision informed by the test requires new independent evidence.",
+            "A predefined walk-forward retraining procedure can provide chronological forward evaluation if features are also point in time."
+          ],
+          "traps": [
+            "Renaming a reused holdout does not restore its independence.",
+            "Annual retraining does not imply independent yearly returns."
+          ]
+        },
+        {
+          "number": 3,
+          "title": "Return, Volatility, and Drawdown",
+          "ids": [
+            "QF2-D6G3Q1",
+            "QF2-D6G3Q2",
+            "QF2-D6G3Q3"
+          ],
+          "page": 677,
+          "rules": [
+            "Compute cumulative return from ending relative to starting wealth, with cash flows handled consistently.",
+            "Measure drawdown relative to a running peak, not only the original investment.",
+            "Report return, volatility, and drawdown together when comparing different paths."
+          ],
+          "traps": [
+            "Ending above the initial investment does not mean recovery to the prior peak.",
+            "The recovery percentage after a loss exceeds the loss percentage because its base is smaller."
+          ]
+        },
+        {
+          "number": 4,
+          "title": "Risk-Adjusted Performance Metrics",
+          "ids": [
+            "QF2-D6G4Q1",
+            "QF2-D6G4Q2",
+            "QF2-D6G4Q3"
+          ],
+          "page": 678,
+          "rules": [
+            "Sharpe compares excess return over the risk-free rate with total volatility.",
+            "Sortino uses downside deviation below a stated target; information ratio uses active return and tracking error.",
+            "Match the metric to the objective and inspect tails and drawdowns beyond a single ratio."
+          ],
+          "traps": [
+            "Equal Sharpe and IR values can be a numerical coincidence, not equivalent definitions.",
+            "Higher Sharpe does not guarantee a smaller maximum drawdown."
+          ]
+        },
+        {
+          "number": 5,
+          "title": "Turnover and Trading Behavior",
+          "ids": [
+            "QF2-D6G5Q1",
+            "QF2-D6G5Q2",
+            "QF2-D6G5Q3"
+          ],
+          "page": 681,
+          "rules": [
+            "Turnover measures trading intensity and helps identify short holding periods or unnecessary churn.",
+            "Frequent weak-signal reversals can spend gross alpha on spread, fees, and impact.",
+            "Evaluate no-trade bands and slower updates by net performance and risk, not merely by reduced transaction count."
+          ],
+          "traps": [
+            "Equal gross Sharpe does not imply equal net Sharpe.",
+            "Lower turnover does not guarantee lower risk or better performance in every regime."
+          ]
+        },
+        {
+          "number": 6,
+          "title": "Performance Attribution",
+          "ids": [
+            "QF2-D6G6Q1",
+            "QF2-D6G6Q2",
+            "QF2-D6G6Q3"
+          ],
+          "page": 683,
+          "rules": [
+            "Compare returns with exposures before calling outperformance alpha.",
+            "Different long and short betas can leave market exposure even when net dollars are zero.",
+            "Decompose sector allocation, selection, timing, and factor contributions under the stated attribution framework."
+          ],
+          "traps": [
+            "A high-beta strategy beating a rising market may have no residual alpha.",
+            "Aggregate active return alone does not reveal its sources."
+          ]
+        },
+        {
+          "number": 7,
+          "title": "Stability, Significance, and Robustness",
+          "ids": [
+            "QF2-D6G7Q1",
+            "QF2-D6G7Q2",
+            "QF2-D6G7Q3"
+          ],
+          "page": 685,
+          "rules": [
+            "Examine subperiod and regime results and sensitivity to plausible costs and nearby parameters.",
+            "Investigate concentration of profit in a few trades without assuming those trades are either repeatable or invalid.",
+            "Distinguish statistical evidence of positive mean from economic value after operating and opportunity costs."
+          ],
+          "traps": [
+            "Failure to reject zero does not prove the true mean is exactly zero.",
+            "One strong regime or fragile parameter peak does not establish robustness."
+          ]
+        }
+      ],
+      "formulas": [
+        {
+          "name": "Cumulative return",
+          "formula": "R = V_T / V_0 − 1",
+          "conditions": "No external cash flows in the pool examples; otherwise choose an appropriate cash-flow-adjusted method."
+        },
+        {
+          "name": "Drawdown and recovery",
+          "formula": "Peak_t = max_(s≤t) V_s; DD_t = 1 − V_t/Peak_t; MDD = max_t DD_t; recovery = d/(1−d)",
+          "conditions": "Drawdown d is a positive loss fraction below 1; recovery is the gain needed to regain the same peak."
+        },
+        {
+          "name": "Sharpe ratio",
+          "formula": "Sharpe = mean(r_p − r_f) / sd(r_p − r_f)",
+          "conditions": "Use consistent periods; for a constant risk-free return the denominator equals portfolio-return volatility. The pool’s annual examples provide annual inputs directly."
+        },
+        {
+          "name": "Sortino ratio",
+          "formula": "Sortino = mean(r_p − τ) / sqrt(mean(min(r_p−τ, 0)²))",
+          "conditions": "τ is a defined target; state the downside-deviation convention and use consistent frequency."
+        },
+        {
+          "name": "Information ratio",
+          "formula": "IR = mean(r_p − r_b) / sd(r_p − r_b)",
+          "conditions": "Benchmark-relative numerator and denominator; changing the benchmark can change both."
+        },
+        {
+          "name": "Simplified beta attribution",
+          "formula": "r_beta = r_f + β(r_m − r_f); α_residual = r_p − r_beta",
+          "conditions": "The exercise treats estimated beta and observed returns as given; residual return is not automatically proof of stable skill."
+        }
+      ],
+      "examples": [
+        {
+          "title": "Drawdown uses the peak",
+          "prompt": "A portfolio goes from $100 to $120, falls to $90, and ends at $108.",
+          "work": "Maximum observed drawdown = (120−90)/120 = 25%. Ending cumulative return = 108/100−1 = 8%. Recovery from $90 to $120 requires 30/90 = 33.3%.",
+          "result": "The portfolio finishes profitable but remains 10% below its $120 peak.",
+          "id": "QF2-D6G3Q2",
+          "page": 677
+        },
+        {
+          "title": "Higher return, lower Sharpe",
+          "prompt": "Risk-free rate is 2%. A earns 10% with 16% volatility; B earns 8% with 8% volatility.",
+          "work": "Sharpe_A = (10−2)/16 = 0.50. Sharpe_B = (8−2)/8 = 0.75.",
+          "result": "B has the higher Sharpe despite A’s higher raw return.",
+          "id": "QF2-D6G4Q1",
+          "page": 678
+        },
+        {
+          "title": "Beta can explain outperformance",
+          "prompt": "A strategy earns 14%, cash earns 2%, the market earns 10%, and estimated beta is 1.5.",
+          "work": "Beta-implied return = 2% + 1.5×(10%−2%) = 14%. Residual under the stated model = 14%−14% = 0%.",
+          "result": "The 4-point advantage over the market does not establish alpha.",
+          "id": "QF2-D6G6Q1",
+          "page": 683
+        }
+      ]
+    },
+    {
+      "id": "QF2-D7",
+      "subject": "QF",
+      "number": 7,
+      "title": "Trading Frictions, Capacity, and Implementability",
+      "count": 21,
+      "page": 689,
+      "core": [
+        {
+          "title": "Costs extend beyond commissions",
+          "text": "Explicit commissions and fees are billed directly. Implicit costs include crossing the spread, slippage relative to a specified benchmark, market impact, and missed opportunities from incomplete execution. Identify the reference price before computing a cost. A later favorable price movement does not erase the cost of implementing the original decision, and overlapping cost labels should not be counted twice."
+        },
+        {
+          "title": "Turnover turns small costs into large drag",
+          "text": "The expected net edge is the expected gross edge minus the costs needed to enter, hold, and exit. A small positive forecast can be uneconomic when round-trip costs exceed it. Turnover multiplies trading cost per dollar into portfolio-level drag. Thresholds, no-trade bands, and slower rebalancing may improve net results while sacrificing some gross alpha."
+        },
+        {
+          "title": "Liquidity and capacity depend on size",
+          "text": "A quote applies only to the depth available at that price. Large orders can consume several book levels and move prices; average daily volume does not guarantee a fill. Scaling capital raises dollar trading requirements without creating opportunities. Capacity depends on the signal’s horizon, turnover, market depth, impact, and the quality of marginal trades, especially under stress."
+        },
+        {
+          "title": "Funding and crowding change feasibility",
+          "text": "Short sales require available borrow, may incur changing fees, and can be recalled; margin increases can force deleveraging. Similar investors can enter or exit the same positions together, reducing alpha and worsening liquidity. Short squeezes and synchronized unwinds can make normal-period cost assumptions unreliable even when the original predictive relationship was real."
+        }
+      ],
+      "groups": [
+        {
+          "number": 1,
+          "title": "Explicit and Implicit Trading Costs",
+          "ids": [
+            "QF2-D7G1Q1",
+            "QF2-D7G1Q2",
+            "QF2-D7G1Q3"
+          ],
+          "page": 689,
+          "rules": [
+            "Separate directly billed fees from spread, slippage, impact, and non-execution opportunity costs.",
+            "For a buy, compare fill with the stated arrival reference; decompose spread and additional slippage without double counting.",
+            "Post-trade reversion can be consistent with temporary pressure but does not prove that the full order was executable at the later price earlier."
+          ],
+          "traps": [
+            "Zero commission does not mean zero trading cost.",
+            "A better ending midpoint is not a replacement for the decision-time benchmark."
+          ]
+        },
+        {
+          "number": 2,
+          "title": "Turnover and Cost Drag",
+          "ids": [
+            "QF2-D7G2Q1",
+            "QF2-D7G2Q2",
+            "QF2-D7G2Q3"
+          ],
+          "page": 691,
+          "rules": [
+            "Apply the explicitly stated turnover convention to compute total dollars traded.",
+            "Compare forecasted gross edge with the relevant one-way or round-trip cost before trading.",
+            "Higher thresholds and slower rebalancing can reduce churn while also missing or delaying opportunities."
+          ],
+          "traps": [
+            "Higher gross alpha can coexist with lower net alpha.",
+            "A forecast above a cost threshold does not guarantee each trade profits."
+          ]
+        },
+        {
+          "number": 3,
+          "title": "Liquidity and Tradability",
+          "ids": [
+            "QF2-D7G3Q1",
+            "QF2-D7G3Q2",
+            "QF2-D7G3Q3"
+          ],
+          "page": 693,
+          "rules": [
+            "Compare order size with market volume and book depth, not only the quoted spread.",
+            "A market order can consume several prices, making its average fill worse than the best quote.",
+            "Stress liquidity assumptions because spreads, depth, and exit time can deteriorate together."
+          ],
+          "traps": [
+            "Average daily volume is a scale estimate, not guaranteed executable liquidity.",
+            "Equal top-of-book spreads do not imply equal impact for large trades."
+          ]
+        },
+        {
+          "number": 4,
+          "title": "Market Impact and Order Size",
+          "ids": [
+            "QF2-D7G4Q1",
+            "QF2-D7G4Q2",
+            "QF2-D7G4Q3"
+          ],
+          "page": 695,
+          "rules": [
+            "Participation measures the order’s size relative to the stated market volume.",
+            "Larger and faster orders can increase impact, potentially nonlinearly.",
+            "Slower schedules can reduce immediate pressure but add timing risk and lose decaying alpha.",
+            "A post-order price reversal is consistent with temporary impact; persistent price movement alone does not prove permanent causal impact."
+          ],
+          "traps": [
+            "Lowest estimated spread and impact does not necessarily mean lowest total shortfall.",
+            "Peak price displacement is not automatically the permanent-impact component."
+          ]
+        },
+        {
+          "number": 5,
+          "title": "Capacity and Scaling",
+          "ids": [
+            "QF2-D7G5Q1",
+            "QF2-D7G5Q2",
+            "QF2-D7G5Q3"
+          ],
+          "page": 697,
+          "rules": [
+            "More capital requires more traded dollars for a fixed turnover rate, without automatically expanding opportunities.",
+            "Net return can fall because gross alpha dilutes and costs rise at larger scale.",
+            "Deeper markets, lower turnover, or longer horizons may expand capacity but can change forecast strength and risk."
+          ],
+          "traps": [
+            "Small-scale percentage returns are not guaranteed at much larger capital.",
+            "Largest gross dollar profit does not identify the best net deployment."
+          ]
+        },
+        {
+          "number": 6,
+          "title": "Shorting, Borrowing, and Funding Constraints",
+          "ids": [
+            "QF2-D7G6Q1",
+            "QF2-D7G6Q2",
+            "QF2-D7G6Q3"
+          ],
+          "page": 699,
+          "rules": [
+            "Model borrow availability, variable borrow fees, recall risk, financing, and margin constraints.",
+            "Gross exposure adds absolute long and short positions; net exposure subtracts shorts from longs.",
+            "Rising short prices or margin requirements can force covering or deleveraging despite unchanged forecasts."
+          ],
+          "traps": [
+            "Historical price data alone do not establish that a stock was shortable.",
+            "An uncovered short stock position can lose more than its initial market value."
+          ]
+        },
+        {
+          "number": 7,
+          "title": "Crowding and Implementation Risk",
+          "ids": [
+            "QF2-D7G7Q1",
+            "QF2-D7G7Q2",
+            "QF2-D7G7Q3"
+          ],
+          "page": 701,
+          "rules": [
+            "Shared signals can produce overlapping positions and synchronized sales of longs or covering of shorts.",
+            "Competitors may capture a predicted move before the assumed backtest fill.",
+            "Assess aggregate participation and stressed joint exits, not only an individual strategy in calm markets."
+          ],
+          "traps": [
+            "Public data do not guarantee equal execution access or latency.",
+            "Crowding can affect liquidity and drawdown as well as average alpha."
+          ]
+        }
+      ],
+      "formulas": [
+        {
+          "name": "Basis points and net edge",
+          "formula": "1 bp = 0.0001 = 0.01%; expected net edge ≈ gross edge − all relevant costs",
+          "conditions": "Match horizon and one-way versus round-trip cost conventions."
+        },
+        {
+          "name": "Turnover cost drag",
+          "formula": "Traded dollars = turnover × NAV; cost = traded dollars × cost rate; drag = turnover × cost rate",
+          "conditions": "Here turnover means total dollar volume traded divided by portfolio value, as explicitly defined in D7G2Q1."
+        },
+        {
+          "name": "Buy execution cost relative to arrival",
+          "formula": "Cost = Q(P_fill − P_arrival) + explicit fees",
+          "conditions": "Completed buy with average fill; opportunity cost for unfilled shares is additional. Spread and impact may already be included in the price difference."
+        },
+        {
+          "name": "Participation rate",
+          "formula": "Participation = order volume / stated market volume",
+          "conditions": "Use matching shares or dollar units and the same interval; ADV is a forecast proxy, not realized depth."
+        },
+        {
+          "name": "Weighted average fill",
+          "formula": "P_fill = Σ(q_j P_j) / Σq_j",
+          "conditions": "Weights are actually executed shares at each price level."
+        },
+        {
+          "name": "Gross leverage",
+          "formula": "Gross leverage = (long market value + |short market value|) / equity",
+          "conditions": "Net exposure uses long minus absolute short; neither gross nor net alone measures portfolio covariance risk."
+        }
+      ],
+      "examples": [
+        {
+          "title": "Spread, slippage, and explicit fees",
+          "prompt": "Buy 1,000 shares with bid $49.95, ask $50.05, midpoint $50.00, fill $50.07, and $5 commission.",
+          "work": "Spread is $0.10. Crossing from midpoint to ask costs $0.05×1,000 = $50. Additional slippage beyond ask costs $0.02×1,000 = $20. Add $5 commission.",
+          "result": "Total cost versus arrival midpoint = $75; do not add the full spread again.",
+          "id": "QF2-D7G1Q1",
+          "page": 689
+        },
+        {
+          "title": "Turnover scales the same per-dollar fee",
+          "prompt": "Two $10 million funds trade 20% and 200% of NAV monthly. One-way cost is 10 bps under the stated total-dollar-volume convention.",
+          "work": "Traded amounts are $2 million and $20 million. At 0.001 cost per dollar, monthly costs are $2,000 and $20,000, or 0.02% and 0.20% of NAV.",
+          "result": "The high-turnover strategy spends ten times more on this cost component.",
+          "id": "QF2-D7G2Q1",
+          "page": 691
+        },
+        {
+          "title": "Walk the book",
+          "prompt": "A 3,000-share buy sees 500 shares at $20.10, 1,000 at $20.30, and 2,000 at $20.60, with no new liquidity.",
+          "work": "It consumes 500 + 1,000 + 1,500 shares. Dollar cost = 500×20.10 + 1,000×20.30 + 1,500×20.60 = $61,250. Average fill = 61,250/3,000 ≈ $20.4167.",
+          "result": "The best ask is not the executable average price for the entire order.",
+          "id": "QF2-D7G3Q2",
+          "page": 694
+        },
+        {
+          "title": "Capacity changes net value",
+          "prompt": "At $10m, $50m, and $200m, estimated gross alpha is 6%, 5%, and 3%, with costs of 1%, 2%, and 4%.",
+          "work": "Net alpha is 5%, 3%, and −1%. Approximate net alpha dollars are $0.5m, $1.5m, and −$2m respectively under these estimates.",
+          "result": "Greater capital can increase net dollars initially while reducing percentage return; excessive scale can destroy value.",
+          "id": "QF2-D7G5Q2",
+          "page": 697
+        }
+      ]
+    },
+    {
+      "id": "QF2-D8",
+      "subject": "QF",
+      "number": 8,
+      "title": "Execution Algorithms and Order Book Analytics",
+      "count": 21,
+      "page": 706,
+      "core": [
+        {
+          "title": "Choose the benchmark that matches the task",
+          "text": "Arrival price evaluates the cost of implementing a decision from its starting point. VWAP weights market prices by traded volume; TWAP averages across time intervals; the close can matter for a closing mandate. A fill may beat one benchmark and lag another. Evaluate the full parent decision, including unfilled quantity, rather than rewarding only favorable completed shares."
+        },
+        {
+          "title": "Price improvement competes with completion",
+          "text": "An aggressive buy normally consumes asks; an aggressive sell consumes bids. Passive limits may save the spread but can wait, partially fill, or miss the trade. Limit price, queue position, displayed depth, cancellations, and urgency influence execution. A cheaper quoted limit is not necessarily a cheaper economic outcome when the signal disappears or the market moves away."
+        },
+        {
+          "title": "Scheduling is a risk tradeoff",
+          "text": "Fast execution reduces exposure of the remaining order to price movement and signal decay, but can increase impact. Slower execution spreads demand over time while accepting waiting risk. VWAP follows a forecast volume shape, TWAP allocates through equal time intervals, and participation strategies react to observed volume. Unexpected volume and liquidity changes can require a schedule update."
+        },
+        {
+          "title": "Displayed liquidity and filled orders need context",
+          "text": "Order-book imbalance describes visible demand and supply at an instant, not certain price direction or guaranteed liquidity. Quote persistence, deeper levels, cancellations, and latency matter. Passive orders can fill disproportionately just before adverse moves, and predictable child orders can reveal remaining demand. Evaluate post-fill markouts, completion, impact, and leakage together."
+        }
+      ],
+      "groups": [
+        {
+          "number": 1,
+          "title": "Execution Objectives and Benchmarks",
+          "ids": [
+            "QF2-D8G1Q1",
+            "QF2-D8G1Q2",
+            "QF2-D8G1Q3"
+          ],
+          "page": 706,
+          "rules": [
+            "Select arrival, VWAP, TWAP, or closing benchmarks according to the execution objective.",
+            "For completed buys, arrival shortfall includes quantity times fill-minus-arrival plus explicit costs.",
+            "Include the opportunity cost of unfilled shares when evaluating the whole parent decision."
+          ],
+          "traps": [
+            "A later profitable market move does not erase decision-time execution cost.",
+            "Beating VWAP on average does not prove every child order was favorable."
+          ]
+        },
+        {
+          "number": 2,
+          "title": "Aggressive vs. Passive Execution",
+          "ids": [
+            "QF2-D8G2Q1",
+            "QF2-D8G2Q2",
+            "QF2-D8G2Q3"
+          ],
+          "page": 708,
+          "rules": [
+            "Marketable buys normally interact with asks; marketable sells normally interact with bids, subject to available depth.",
+            "Passive limits can improve price if filled while exposing the remaining quantity to delay and non-completion.",
+            "Choose aggressiveness using urgency and opportunity cost as well as the quoted spread."
+          ],
+          "traps": [
+            "Posting at the best bid does not guarantee a buy fill.",
+            "A favorable partial fill does not establish superior execution for the entire decision."
+          ]
+        },
+        {
+          "number": 3,
+          "title": "Order Scheduling Over Time",
+          "ids": [
+            "QF2-D8G3Q1",
+            "QF2-D8G3Q2",
+            "QF2-D8G3Q3"
+          ],
+          "page": 710,
+          "rules": [
+            "Faster schedules usually reduce unexecuted exposure time but can demand more liquidity and impact.",
+            "Front-loading executes more before a specified event; it reduces remaining exposure to that event without guaranteeing a better price.",
+            "Update scheduling as volatility, depth, urgency, and the signal’s decay change."
+          ],
+          "traps": [
+            "Slower execution does not always minimize total implementation shortfall.",
+            "A deadline or risk-limit change can justify higher immediate impact."
+          ]
+        },
+        {
+          "number": 4,
+          "title": "VWAP, TWAP, and Participation Strategies",
+          "ids": [
+            "QF2-D8G4Q1",
+            "QF2-D8G4Q2",
+            "QF2-D8G4Q3"
+          ],
+          "page": 712,
+          "rules": [
+            "A VWAP-style schedule follows forecast volume fractions; TWAP allocates equally to equal time intervals.",
+            "A percentage-of-volume strategy targets a stated fraction of observed volume and adapts its pace to activity.",
+            "Forecast-volume errors can leave too much quantity for illiquid later intervals; dynamic updates may help."
+          ],
+          "traps": [
+            "Fixed participation does not guarantee completion by a clock-time deadline.",
+            "TWAP does not require an intraday market-volume forecast by definition."
+          ]
+        },
+        {
+          "number": 5,
+          "title": "Limit Order Placement and Fill Probability",
+          "ids": [
+            "QF2-D8G5Q1",
+            "QF2-D8G5Q2",
+            "QF2-D8G5Q3"
+          ],
+          "page": 714,
+          "rules": [
+            "A less competitive limit generally trades price improvement for lower immediate fill probability.",
+            "Under price-time priority, earlier same-price orders usually have better queue positions, subject to cancellations.",
+            "After partial fills, re-evaluate remaining quantity, urgency, price movement, and the queue effect of repricing."
+          ],
+          "traps": [
+            "Equal limit prices do not imply equal fill probabilities.",
+            "A partial fill does not settle the best action for the remaining order."
+          ]
+        },
+        {
+          "number": 6,
+          "title": "Order Book Imbalance and Short-Term Signals",
+          "ids": [
+            "QF2-D8G6Q1",
+            "QF2-D8G6Q2",
+            "QF2-D8G6Q3"
+          ],
+          "page": 716,
+          "rules": [
+            "Compute the defined imbalance from bid and ask depth at the stated book levels.",
+            "Positive best-level imbalance can indicate upward pressure under some conditions but remains a noisy, short-lived signal.",
+            "Check quote persistence, cancellations, deeper liquidity, execution latency, and costs before using a snapshot signal."
+          ],
+          "traps": [
+            "Large displayed bids need not be reliable executable support.",
+            "A suspicious cancellation pattern alone does not prove manipulation."
+          ]
+        },
+        {
+          "number": 7,
+          "title": "Adverse Selection and Execution Quality",
+          "ids": [
+            "QF2-D8G7Q1",
+            "QF2-D8G7Q2",
+            "QF2-D8G7Q3"
+          ],
+          "page": 718,
+          "rules": [
+            "Adverse selection occurs when fills tend to arrive just before price moves against the passive trader.",
+            "Assess post-fill price movement and completion alongside spread savings and fill rate.",
+            "Predictable child-order patterns can leak remaining demand; changing patterns may reduce but not eliminate leakage."
+          ],
+          "traps": [
+            "A passive fill does not automatically earn the spread as profit.",
+            "Splitting a parent order does not automatically hide its intent."
+          ]
+        }
+      ],
+      "formulas": [
+        {
+          "name": "VWAP and TWAP",
+          "formula": "VWAP = Σ(P_j V_j)/ΣV_j; TWAP = (1/m)ΣP_j",
+          "conditions": "VWAP weights actual market volume; this TWAP expression uses equal-duration intervals and defined representative prices."
+        },
+        {
+          "name": "Full-decision buy shortfall",
+          "formula": "IS = Q_f(P_fill−P_0) + Q_u(P_end−P_0) + fees",
+          "conditions": "P_0 is decision/arrival reference; Q_f and Q_u are filled and unfilled shares. P_end values the missed opportunity at the chosen evaluation endpoint."
+        },
+        {
+          "name": "Participation target",
+          "formula": "q_j = p × V_j",
+          "conditions": "Simplified percentage-of-observed-volume rule with the question’s stated market-volume convention and no other limits."
+        },
+        {
+          "name": "Order-book imbalance",
+          "formula": "I = (D_bid − D_ask) / (D_bid + D_ask)",
+          "conditions": "Nonzero total displayed depth; range [−1,1]. Scope can be best level or explicitly aggregated levels."
+        },
+        {
+          "name": "Signed execution cost and markout",
+          "formula": "Cost/share = s(P_fill−P_ref); markout = s(P_later−P_fill), s = +1 for buy and −1 for sell",
+          "conditions": "Positive cost is unfavorable; positive markout is favorable. Specify later-price horizon and use comparable references."
+        }
+      ],
+      "examples": [
+        {
+          "title": "Arrival shortfall",
+          "prompt": "Buy 20,000 shares from a $40.00 arrival midpoint, fill at $40.12, and pay $200 commission.",
+          "work": "Price shortfall = 20,000×0.12 = $2,400; including fees = $2,600. Relative to $800,000 arrival notional, cost is 0.325% = 32.5 bps.",
+          "result": "A $40.30 later close does not change this $2,600 execution cost.",
+          "id": "QF2-D8G1Q1",
+          "page": 706
+        },
+        {
+          "title": "Account for unfilled shares",
+          "prompt": "The decision is to buy 100,000 shares at arrival $60.00. Fill 70,000 at $60.10; 30,000 remain unfilled when price closes $60.50. Ignore fees.",
+          "work": "Filled shortfall = 70,000×0.10 = $7,000. Missed-opportunity cost = 30,000×0.50 = $15,000. Full-decision shortfall = $22,000. The fills alone are $0.40 below the close.",
+          "result": "Favorable filled-share comparison with the close can coexist with substantial total implementation shortfall.",
+          "id": "QF2-D8G1Q3",
+          "page": 707
+        },
+        {
+          "title": "Participation follows observed volume",
+          "prompt": "A 10% participation rule sees intervals with 100,000, 300,000, and 50,000 market shares.",
+          "work": "Targets are 10,000, 30,000, and 5,000 shares, totaling 45,000. If the parent order is larger, it remains incomplete absent later volume or changed instructions.",
+          "result": "A percentage-of-volume target does not promise completion by a fixed deadline.",
+          "id": "QF2-D8G4Q2",
+          "page": 712
+        },
+        {
+          "title": "Read imbalance correctly",
+          "prompt": "Displayed best-bid depth is 80,000 shares and best-ask depth is 20,000.",
+          "work": "I = (80,000−20,000)/(80,000+20,000) = 0.60. There is four times as much displayed bid as ask depth at this instant.",
+          "result": "Positive 0.60 is a snapshot feature, not a 60% guaranteed price rise or a certainty about the next tick.",
+          "id": "QF2-D8G6Q1",
+          "page": 716
+        }
+      ]
+    },
+    {
+      "id": "QF2-D9",
+      "subject": "QF",
+      "number": 9,
+      "title": "Options and Derivative Payoffs",
+      "count": 21,
+      "page": 723,
+      "core": [
+        {
+          "title": "Rights and obligations have different signs",
+          "text": "A call holder has the right to buy at the strike; a put holder has the right to sell. At expiration, the long holder exercises only when the payoff is positive. The writer has the corresponding obligation and opposite option payoff. A long option’s payoff is never negative, while its profit can be negative because the buyer paid a premium."
+        },
+        {
+          "title": "Keep payoff, profit, and moneyness separate",
+          "text": "Call payoff is max(S_T−K,0); put payoff is max(K−S_T,0). Buyer profit subtracts the premium and writer profit adds it to the opposite payoff. Moneyness compares spot with strike and ignores the premium; therefore an in-the-money option can still lose money. State whether values are per share or multiplied by the contract size."
+        },
+        {
+          "title": "Before expiry, possibility has value",
+          "text": "Intrinsic value is the nonnegative immediate-exercise amount. An out-of-the-money option can still have value because time remains for favorable terminal outcomes. Greater volatility can increase a standard long option’s value through its asymmetric payoff, with other pricing inputs fixed. Time decay is a conditional comparison, not a guarantee of a daily price decline while markets move."
+        },
+        {
+          "title": "Hedges reshape, rather than erase, risk",
+          "text": "A stock plus protective put has a terminal floor before premium and retains upside, but its insurance costs money. A covered call receives premium while capping stock upside above the strike and retaining substantial downside. Long calls, puts, straddles, stock, and uncovered writers have different piecewise exposures; the same bullish direction does not make them fixed-leverage equivalents."
+        }
+      ],
+      "groups": [
+        {
+          "number": 1,
+          "title": "Call Option Payoffs",
+          "ids": [
+            "QF2-D9G1Q1",
+            "QF2-D9G1Q2",
+            "QF2-D9G1Q3"
+          ],
+          "page": 723,
+          "rules": [
+            "A long call pays max(S_T−K,0) at expiration and gives a right rather than an obligation to buy.",
+            "A call at or below strike expires with zero exercise payoff; premium can still create a loss.",
+            "An uncovered short call has the opposite payoff and potentially unbounded loss as the stock price rises."
+          ],
+          "traps": [
+            "Call payoff is not negative when the stock finishes below strike.",
+            "The short call’s loss is not capped at the strike."
+          ]
+        },
+        {
+          "number": 2,
+          "title": "Put Option Payoffs",
+          "ids": [
+            "QF2-D9G2Q1",
+            "QF2-D9G2Q2",
+            "QF2-D9G2Q3"
+          ],
+          "page": 725,
+          "rules": [
+            "A long put pays max(K−S_T,0) and can be bought for speculation without owning stock.",
+            "For a nonnegative stock price, maximum long-put payoff is K; the writer has the opposite payoff.",
+            "Short-put profit equals received premium minus payoff obligation, so maximum loss is K minus premium under the stated assumptions."
+          ],
+          "traps": [
+            "A put is valuable at expiration when the stock is below, not above, its strike.",
+            "A bounded short-put loss can still be substantial; it differs from uncovered short-call loss."
+          ]
+        },
+        {
+          "number": 3,
+          "title": "Premium, Payoff, Profit, and Breakeven",
+          "ids": [
+            "QF2-D9G3Q1",
+            "QF2-D9G3Q2",
+            "QF2-D9G3Q3"
+          ],
+          "page": 727,
+          "rules": [
+            "Buyer profit subtracts premium from expiration payoff; writer profit is the exact opposite before other costs.",
+            "Call breakeven is K+C; put breakeven is K−P at expiration under the simplified undiscounted calculation.",
+            "A positive exercise payoff can be smaller than the paid premium and leave a net loss."
+          ],
+          "traps": [
+            "Received premium is not the writer’s final profit when exercise creates an obligation.",
+            "At-the-money expiration does not reimburse the buyer’s premium."
+          ]
+        },
+        {
+          "number": 4,
+          "title": "Moneyness and Intrinsic Value",
+          "ids": [
+            "QF2-D9G4Q1",
+            "QF2-D9G4Q2",
+            "QF2-D9G4Q3"
+          ],
+          "page": 728,
+          "rules": [
+            "Calls are in the money when S>K; puts are in the money when S<K; equality is at the money.",
+            "Intrinsic value is floored at zero and excludes premium.",
+            "Stock-price changes can change moneyness even when the strike is fixed."
+          ],
+          "traps": [
+            "Out-of-the-money intrinsic value is zero, not negative.",
+            "A call and put with the same strike cannot both be strictly in the money at the same spot price."
+          ]
+        },
+        {
+          "number": 5,
+          "title": "Time Value and Volatility Intuition",
+          "ids": [
+            "QF2-D9G5Q1",
+            "QF2-D9G5Q2",
+            "QF2-D9G5Q3"
+          ],
+          "page": 730,
+          "rules": [
+            "An out-of-the-money option can have positive pre-expiry market value despite zero intrinsic value.",
+            "Under the standard comparison with other inputs fixed, greater volatility can raise long-call value because upside payoff is retained and downside payoff is floored.",
+            "For the out-of-the-money call in the question, less remaining time generally reduces time value; no time value remains at expiration."
+          ],
+          "traps": [
+            "A positive option price with zero intrinsic value is not necessarily a pricing error.",
+            "Time decay does not guarantee a lower observed price every day when spot and volatility also change."
+          ]
+        },
+        {
+          "number": 6,
+          "title": "Hedging with Options",
+          "ids": [
+            "QF2-D9G6Q1",
+            "QF2-D9G6Q2",
+            "QF2-D9G6Q3"
+          ],
+          "page": 732,
+          "rules": [
+            "A protective put creates a terminal stock-value floor at its strike before the insurance premium.",
+            "A covered call owns stock against the written call, receives premium, and gives up gains above the strike.",
+            "Strike choice trades protection against cost; a hedge on a different underlying can leave basis risk."
+          ],
+          "traps": [
+            "Protection need not prevent a loss relative to original purchase price plus premium.",
+            "Covered calls do not retain unlimited stock upside or eliminate stock downside."
+          ]
+        },
+        {
+          "number": 7,
+          "title": "Nonlinear and Asymmetric Payoffs",
+          "ids": [
+            "QF2-D9G7Q1",
+            "QF2-D9G7Q2",
+            "QF2-D9G7Q3"
+          ],
+          "page": 734,
+          "rules": [
+            "Long stock has linear terminal exposure; option payoffs change slope at their strikes.",
+            "A long call loses at most premium, while an uncovered short call earns at most premium and can lose without a fixed upper bound.",
+            "A same-strike long call plus long put benefits from sufficiently large moves in either direction, after covering both premiums."
+          ],
+          "traps": [
+            "A call is not a fixed multiple of stock across terminal prices.",
+            "Below strike, further stock declines do not further reduce a long call’s zero expiration payoff."
+          ]
+        }
+      ],
+      "formulas": [
+        {
+          "name": "Long and short call",
+          "formula": "Call payoff = max(S_T−K,0); long profit = max(S_T−K,0)−C; short profit = C−max(S_T−K,0)",
+          "conditions": "Per share, held to expiration; ignore other costs and the financing value of the premium, as in the pool."
+        },
+        {
+          "name": "Long and short put",
+          "formula": "Put payoff = max(K−S_T,0); long profit = max(K−S_T,0)−P; short profit = P−max(K−S_T,0)",
+          "conditions": "Per share at expiration; assume S_T ≥ 0 for bounded maximum put payoff."
+        },
+        {
+          "name": "Expiration breakeven",
+          "formula": "Long call: S_T = K+C; long put: S_T = K−P",
+          "conditions": "Premiums C and P are per share; ignores commissions, dividends, and financing."
+        },
+        {
+          "name": "Contract scaling",
+          "formula": "Contract payoff or profit = per-share amount × contract multiplier",
+          "conditions": "Use the explicitly stated multiplier; the pool examples specify 100 shares when needed."
+        },
+        {
+          "name": "Protective put",
+          "formula": "Terminal value = S_T + max(K−S_T,0) = max(S_T,K); profit = max(S_T,K)−S_0−P",
+          "conditions": "One put unit per share of stock, held to expiry; ignore dividends, financing, and other costs."
+        },
+        {
+          "name": "Covered call",
+          "formula": "Profit = S_T−S_0 + C−max(S_T−K,0) = min(S_T,K)−S_0+C",
+          "conditions": "One written call unit per owned share; upside caps at K−S_0+C and substantial stock downside remains."
+        },
+        {
+          "name": "Long straddle",
+          "formula": "Payoff = |S_T−K|; profit = |S_T−K|−(C+P); breakevens = K ± (C+P)",
+          "conditions": "Same underlying, strike, expiration, and units; ignore financing and other costs; a lower breakeven must be feasible for S_T ≥ 0."
+        }
+      ],
+      "examples": [
+        {
+          "title": "Positive payoff, negative profit",
+          "prompt": "Pay $6 for a $100-strike call. At expiration the stock is $103.",
+          "work": "Call payoff = max(103−100,0) = $3. Profit = 3−6 = −$3 per share. Breakeven is 100+6 = $106.",
+          "result": "In the money does not mean profitable.",
+          "id": "QF2-D9G3Q1",
+          "page": 727
+        },
+        {
+          "title": "A short put’s bounded maximum loss",
+          "prompt": "Write a $60-strike put for a $4 premium and hold through expiration.",
+          "work": "At or above $60, payoff obligation is zero and profit is $4. At stock price zero, obligation is $60 and profit is 4−60 = −$56. Breakeven is $56.",
+          "result": "Maximum profit is $4 and maximum loss is $56 per share, not $64.",
+          "id": "QF2-D9G2Q3",
+          "page": 726
+        },
+        {
+          "title": "Insurance floor versus total profit",
+          "prompt": "Buy stock at $80 and a $75-strike protective put for $3. Stock finishes at $50.",
+          "work": "Stock loss = 50−80 = −$30. Put payoff = 75−50 = $25; put net result = 25−3 = $22. Combined profit = −$8. Terminal stock-plus-put value is $75 against total cost $83.",
+          "result": "The hedge floors terminal value at $75 but does not guarantee no loss on the $83 outlay.",
+          "id": "QF2-D9G6Q1",
+          "page": 732
+        },
+        {
+          "title": "A straddle needs a large enough move",
+          "prompt": "Buy a $100-strike call and put for $6 each.",
+          "work": "Total premium is $12. At $100, profit = −$12. At $125, payoff = $25 and profit = $13. At $80, payoff = $20 and profit = $8. Breakevens are $88 and $112.",
+          "result": "The expiration profit is V-shaped with maximum loss $12 at the strike.",
+          "id": "QF2-D9G7Q2",
+          "page": 735
+        }
+      ]
+    },
+    {
+      "id": "QF2-D10",
+      "subject": "QF",
+      "number": 10,
+      "title": "AI-Enabled Investment Processes and Decision Support",
+      "count": 21,
+      "page": 739,
+      "core": [
+        {
+          "title": "Evaluate the entire investment workflow",
+          "text": "AI can summarize sources, forecast returns, propose weights, execute orders, monitor risk, and explain decisions. Each stage has its own objectives and failure modes. Accurate research summaries do not prove predictive skill; predictive skill does not guarantee feasible allocation or profitable execution. Client explanations must remain grounded in the reasons and evidence actually used."
+        },
+        {
+          "title": "Calibrate autonomy to the decision",
+          "text": "Decision support, bounded automation, and approval-based escalation can coexist. Define who has authority, what limits apply, and when conflicting feeds or unfamiliar conditions trigger a pause or review. Human contextual knowledge can complement broad AI screening, but review is meaningful only when it can challenge assumptions. Neither human involvement nor a high confidence score guarantees correctness."
+        },
+        {
+          "title": "Integrate evidence with provenance",
+          "text": "Knowledge graphs represent entities and relationships so an event can be traced through suppliers, people, and securities. Symbolic rules can enforce explicit restrictions while statistical models estimate forecasts. Correct entity resolution, recency, timing, and materiality remain necessary. Structured numbers and unstructured text can complement or contradict each other; more modalities do not repair corrupted alignment."
+        },
+        {
+          "title": "Govern behavior as markets change",
+          "text": "A readable explanation may not faithfully reflect a model’s actual drivers. Versioned decisions, evidence, approvals, and justified overrides support accountability. Monitor data freshness and cross-feed agreement as well as input distributions and forecast performance. Fixed code can drift as language, competition, or market structure changes, and shared models can synchronize selling across otherwise independent firms."
+        }
+      ],
+      "groups": [
+        {
+          "number": 1,
+          "title": "AI Across the Investment Workflow",
+          "ids": [
+            "QF2-D10G1Q1",
+            "QF2-D10G1Q2",
+            "QF2-D10G1Q3"
+          ],
+          "page": 739,
+          "rules": [
+            "Evaluate research, forecasting, construction, execution, monitoring, and communication against their own objectives and risks.",
+            "Assess net portfolio results because accurate forecasts can be overwhelmed by illiquid allocations and costly execution.",
+            "Ground generated explanations in approved decision records and check the interfaces between stages."
+          ],
+          "traps": [
+            "Success at one stage does not validate the entire platform.",
+            "Approved trades do not authorize invented explanations of their rationale."
+          ]
+        },
+        {
+          "number": 2,
+          "title": "Decision Support vs. Autonomous Decision-Making",
+          "ids": [
+            "QF2-D10G2Q1",
+            "QF2-D10G2Q2",
+            "QF2-D10G2Q3"
+          ],
+          "page": 741,
+          "rules": [
+            "Autonomy can be bounded differently for ordinary low-impact actions and novel or high-impact decisions.",
+            "Predefined limits, escalation rules, monitoring, and safe fallbacks support controlled automation.",
+            "Conflicting feeds or out-of-distribution conditions can warrant pausing even when model confidence is high."
+          ],
+          "traps": [
+            "Strong backtest performance alone does not establish readiness for full autonomy.",
+            "Partial autonomy is coherent; automation does not eliminate model risk."
+          ]
+        },
+        {
+          "number": 3,
+          "title": "Human Intelligence Plus Artificial Intelligence",
+          "ids": [
+            "QF2-D10G3Q1",
+            "QF2-D10G3Q2",
+            "QF2-D10G3Q3"
+          ],
+          "page": 743,
+          "rules": [
+            "Combine AI’s scale with human domain knowledge and investigation of anomalous or material cases.",
+            "Interpret confidence by its definition and calibration across relevant regimes.",
+            "Document disagreement and overrides, then assess the combined process rather than assuming either component is always right."
+          ],
+          "traps": [
+            "A 92% score does not automatically mean a 92% probability of profit.",
+            "Rubber-stamping a score threshold contributes little independent review."
+          ]
+        },
+        {
+          "number": 4,
+          "title": "Knowledge Graphs and Symbolic Representation",
+          "ids": [
+            "QF2-D10G4Q1",
+            "QF2-D10G4Q2",
+            "QF2-D10G4Q3"
+          ],
+          "page": 745,
+          "rules": [
+            "Graphs distinguish entities and relationship types and can support multi-step exposure queries.",
+            "Statistical forecasts and symbolic restrictions can serve complementary roles in one process.",
+            "Check entity resolution, relationship recency, and economic materiality before propagating an event into signals."
+          ],
+          "traps": [
+            "A connection does not establish equal impact or causal return predictiveness.",
+            "A strong forecast does not automatically override a restricted-list rule."
+          ]
+        },
+        {
+          "number": 5,
+          "title": "Structured and Unstructured Information Integration",
+          "ids": [
+            "QF2-D10G5Q1",
+            "QF2-D10G5Q2",
+            "QF2-D10G5Q3"
+          ],
+          "page": 747,
+          "rules": [
+            "Align every modality to the correct entity, fiscal period, and actual information-availability time.",
+            "Maintain historical data vintages when vendors revise series; inspect coverage and nonrandom missingness.",
+            "Weigh conflicting sources using provenance, purpose, and context rather than automatically averaging them."
+          ],
+          "traps": [
+            "Accurate numeric fields do not neutralize mislabeled text features.",
+            "Alternative data do not eliminate bias, collection problems, or provenance requirements."
+          ]
+        },
+        {
+          "number": 6,
+          "title": "Explainability, Governance, and Oversight",
+          "ids": [
+            "QF2-D10G6Q1",
+            "QF2-D10G6Q2",
+            "QF2-D10G6Q3"
+          ],
+          "page": 749,
+          "rules": [
+            "Validate whether explanations faithfully reflect model behavior as well as whether they read clearly.",
+            "Material changes require review of intended use, assumptions, data, controls, and failures, not only validation Sharpe.",
+            "Keep versioned audit trails and contemporaneous records of override evidence, authority, and timing."
+          ],
+          "traps": [
+            "A plausible story does not prove what drove a recommendation.",
+            "A profitable override does not by itself validate the override process."
+          ]
+        },
+        {
+          "number": 7,
+          "title": "Operational, Model, and Systemic Risk",
+          "ids": [
+            "QF2-D10G7Q1",
+            "QF2-D10G7Q2",
+            "QF2-D10G7Q3"
+          ],
+          "page": 751,
+          "rules": [
+            "Monitor freshness and independent feed agreement because schema-valid values can still be stale.",
+            "Detect changes in input distributions and input-outcome relationships even if code remains unchanged.",
+            "Stress shared-model and vendor dependencies because synchronized risk controls can amplify market pressure."
+          ],
+          "traps": [
+            "Unchanged software does not rule out model drift.",
+            "Many securities or separate legal owners do not guarantee independence from systemic AI-driven flows."
+          ]
+        }
+      ],
+      "formulas": [
+        {
+          "name": "Net workflow value",
+          "formula": "Expected net alpha ≈ gross forecast alpha − allocation and execution costs",
+          "conditions": "Use a common horizon and avoid overlapping cost categories; operational and forecast errors can add further losses."
+        },
+        {
+          "name": "Confidence calibration check",
+          "formula": "Observed event rate in score bin B = count(successes in B) / count(predictions in B)",
+          "conditions": "Only compare with nominal probabilities when the score explicitly predicts that event; evaluate sample size and regime."
+        },
+        {
+          "name": "Information-availability constraint",
+          "formula": "feature availability time ≤ decision time < evaluated future outcome interval",
+          "conditions": "Use actual release and revision timestamps, not only fiscal-quarter labels or the latest reconstructed history."
+        }
+      ],
+      "examples": [
+        {
+          "title": "Forecast quality is not net performance",
+          "prompt": "An AI system has 6% annual gross alpha, while estimated costs and impact are 8%.",
+          "work": "Estimated net alpha = 6%−8% = −2%. Examine concentration, liquidity limits, trade urgency, and smaller or slower execution while checking alpha decay.",
+          "result": "Better forecasting alone has not produced an investable implementation.",
+          "id": "QF2-D10G1Q2",
+          "page": 740
+        },
+        {
+          "title": "A confidence label needs a definition",
+          "prompt": "A committee automatically approves scores above 90%; the model reports 92%.",
+          "work": "The score’s target and calibration must be known before reading it as a probability. As an illustrative audit, if 100 comparable “92%” profit-probability forecasts produce only 60 profitable trades, the observed rate is 60%, with sampling and regime uncertainty to investigate.",
+          "result": "A label alone cannot replace evidence and contextual review; the 100-trade audit is illustrative, not a reported pool result.",
+          "id": "QF2-D10G3Q3",
+          "page": 744
+        },
+        {
+          "title": "Trace a graph without inventing causality",
+          "prompt": "A factory shutdown affects a private supplier linked to several public holdings in a knowledge graph.",
+          "work": "Traverse supplier-to-company-to-security links, verify that relationships are current, and assess dependence, substitutability, materiality, and timing for each holding. The graph identifies investigation candidates, not identical impacts.",
+          "result": "Structured connections organize evidence; they do not by themselves prove a trade or its magnitude.",
+          "id": "QF2-D10G4Q1",
+          "page": 745
+        }
+      ]
+    }
+  ],
+  "issues": [],
+  "selfTests": [
+    {
+      "domainId": "QF2-D1",
+      "prompt": "A price rises 20% and then falls 20%. What is the cumulative return, and would summing log returns change the ending wealth?",
+      "answer": "(1.20 × 0.80) − 1 = −4%; $100 becomes $96. Log returns sum to ln(0.96), which converts back to −4%. The representation does not change wealth."
+    },
+    {
+      "domainId": "QF2-D2",
+      "prompt": "A band uses μ = 50, σ = 3, and k = 2. Price is 44. Compute the lower band and z-score; does the touch guarantee a rebound?",
+      "answer": "Lower = 50−2×3 = 44 and z = (44−50)/3 = −2. A lower-band touch is an observation, not a guaranteed reversal; a mean-reversion trade needs evidence, sizing, and costs."
+    },
+    {
+      "domainId": "QF2-D3",
+      "prompt": "A signal is strongest on day 1 and has no detectable IC by day 10. Why might daily rebalancing still be inferior to a slower or staggered rule?",
+      "answer": "Daily updates capture fresher information but may spend more on spreads and impact than the additional alpha they capture. Compare net returns at feasible liquidity and execution timing; a slow rule also risks holding stale positions."
+    },
+    {
+      "domainId": "QF2-D4",
+      "prompt": "A strategy has IC 0.06 and breadth 100. Expansion halves IC and quadruples effective breadth. What happens to predicted IR?",
+      "answer": "Initially 0.06√100 = 0.60. After expansion 0.03√400 = 0.60. The simplified IR is unchanged before considering any change in costs, constraints, or reliability."
+    },
+    {
+      "domainId": "QF2-D5",
+      "prompt": "A portfolio has 160% long exposure and 60% short exposure. Compute gross and net exposure. Does net 100% establish compliance with a 150% gross cap?",
+      "answer": "Gross = 160% + 60% = 220%; net = 160% − 60% = 100%. It violates the gross cap despite being net 100%."
+    },
+    {
+      "domainId": "QF2-D6",
+      "prompt": "A strategy earns 1.5 percentage points more than its passive benchmark before costs and requires 2.0 percentage points of extra costs. What is its net active return?",
+      "answer": "1.5%−2.0% = −0.5 percentage points, all else equal. Gross outperformance does not establish investor value."
+    },
+    {
+      "domainId": "QF2-D7",
+      "prompt": "A trade has 8 bps of expected gross edge and 10 bps of round-trip costs. Another rule trades less, with 7% annual gross alpha and 3% costs. Compute both net values.",
+      "answer": "The individual trade has −2 bps expected net edge; the slower annual rule has 4% estimated net alpha. Compare matched horizons and cost conventions rather than ranking by gross forecasts alone."
+    },
+    {
+      "domainId": "QF2-D8",
+      "prompt": "A passive buy may save $0.04 relative to crossing, but filled passive buys have a subsequent average adverse move of $0.07. Does the spread saving alone establish better execution?",
+      "answer": "No. The $0.07 adverse post-fill movement exceeds the $0.04 initial saving by $0.03 under the stated averages. This is evidence of adverse selection; compare completion, urgency, costs, and consistent markout benchmarks before choosing execution."
+    },
+    {
+      "domainId": "QF2-D9",
+      "prompt": "An investor owns stock bought at $100 and writes a $110 call for $4. What are profits if stock ends at $105, $130, or $0?",
+      "answer": "Covered-call profit = min(S_T,110)−100+4. At $105: $9; at $130: $14; at $0: −$96 per share. The premium cushions downside by $4 and caps upside at $14."
+    },
+    {
+      "domainId": "QF2-D10",
+      "prompt": "A price feed is 20 minutes stale but passes its numeric schema checks, and the model reports high confidence. Which controls address the actual failure?",
+      "answer": "Check timestamps, freshness thresholds, and independent feed agreement; pause or escalate trading through a defined fallback when inputs are unreliable. Valid format and high model confidence do not establish current, trustworthy data."
+    }
+  ]
+}
